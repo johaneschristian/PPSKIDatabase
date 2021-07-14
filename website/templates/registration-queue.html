@@ -26,7 +26,9 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-    <h1 align="center" style="font-family:Montserrat;color:white;margin-top:0vw;">Permohonan Pendaftaran</h1>
+    <div class="input-container">
+        <h1 align="center" style="font-family:Montserrat;color:white;margin-top:0vw;">Permohonan Pendaftaran</h1>
+    </div>
     <div class="container-permohonan-pendaftaran" style="margin-top:5vw;">
         {% for user in temporer %}
         {% if user.status != "direview" %}

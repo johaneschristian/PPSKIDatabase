@@ -73,7 +73,7 @@ td {
 }
 
 .option-box {
-    width: 17vw;                    /* Previously 300px if block implementation is required 85vw*/
+    width: 300px;                    /* Previously 300px if block implementation is required 85vw*/
     height: 200px;                  /* Previously 200px */
     background-color: white;
     border-radius: 20px;
@@ -1072,22 +1072,6 @@ div .grey {
 
 
 
-@keyframes animate {
-
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-
-}
-
 .navbar-white {
     color: white;
 }
@@ -1105,6 +1089,10 @@ div .grey {
     .custom-input {
         margin: 0 0 10px 0;
         width: 80%;
+    }
+
+    .table-rows {
+        flex-direction: column;
     }
 }
 
