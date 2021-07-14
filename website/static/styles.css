@@ -1109,3 +1109,14 @@ div .grey {
         font-size: 2rem;
     }
 }
+
+@media screen and (max-width: 415px) {
+    .login-container {
+        margin-left: 0vw;
+        width: 94vw;
+    }
+
+    .login-input {
+        width: 80vw;
+    }
+}
