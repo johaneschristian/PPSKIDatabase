@@ -73,7 +73,7 @@ td {
 }
 
 .option-box {
-    width: 300px;                    /* Previously 300px if block implementation is required 85vw*/
+    width: 20vw;                    /* Previously 300px if block implementation is required 85vw*/
     height: 200px;                  /* Previously 200px */
     background-color: white;
     border-radius: 20px;
@@ -919,9 +919,9 @@ div .grey {
 
 }
 
-.btn-1:hover {
+/*.btn-1:hover {
     padding: 1rem 2.25rem;
-}
+}*/
 
 
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
@@ -1093,6 +1093,10 @@ div .grey {
 
     .table-rows {
         flex-direction: column;
+    }
+
+    .option-box {
+        width: 300px;
     }
 }
 
