@@ -1119,4 +1119,8 @@ div .grey {
     .login-input {
         width: 80vw;
     }
+
+    .navbar-brand.brand-margin {
+        margin-left: 0vw;
+    }
 }
