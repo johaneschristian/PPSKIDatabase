@@ -54,14 +54,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
           <div class="navbar-nav ml-auto" >
-            {% if accessing_user.is_authenticated %}
-            <a class="nav-item nav-link px-5" id="user-dashboard" style="color:white;margin-right: 50px" href="/dashboard-navigator">Dashboard</a>
-            <a class="nav-item nav-link px-3 enclosing-box-keluar" id="keluar" style="color:white;margin-right:200px" href="/keluar">Keluar</a>
-            {% else %}
-            <a class="nav-item nav-link px-5" style="color:white" id="beranda" href="/">Beranda</a>
-            <a class="nav-item nav-link px-5" style="color:white;margin-right: 50px" id="cek_data_diri" href="/cek-data-anggota">Data Anggota</a>
-            <a class="nav-item nav-link enclosing-box px-3" style="color:#4b7ef2;margin-right: 200px" id="masuk" href="/masuk">Masuk</a>
-            {% endif %}
+            <div class="nav-container">
+              {% if accessing_user.is_authenticated %}
+              <div class="nav-container">
+                <a class="nav-item nav-link px-5" id="user-dashboard" style="color:white;" href="/dashboard-navigator">Dashboard</a>
+              </div>
+              <div class="nav-container" style="width:180px;">
+                <a class="nav-item nav-link px-3 enclosing-box-keluar" id="keluar" style="color:white;" href="/keluar">Keluar</a>
+              </div>
+              {% else %}
+              <div class="nav-container">
+                <a class="nav-item nav-link px-5" style="color:white" id="beranda" href="/">Beranda</a>
+              </div>
+              <div class="nav-container">
+                <a class="nav-item nav-link px-5" style="color:white;" id="cek_data_diri" href="/cek-data-anggota">Data Anggota</a>
+              </div>
+              <div class="nav-container" style="width:180px;">
+                <a class="nav-item nav-link enclosing-box px-3" style="color:#4b7ef2;" id="masuk" href="/masuk">Masuk</a>
+              </div>
+              {% endif %}
+            </div>
           </div>
       </div>
     </nav>

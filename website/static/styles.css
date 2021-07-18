@@ -1,3 +1,10 @@
+.justifier-container {
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+    align: center;
+}
+
 .table-search-button {
     position: relative;
     width: 5vw;
@@ -103,10 +110,9 @@ td {
 .container-permohonan-pendaftaran {
     /* Rectangle 27 */
 
-    position: absolute;
-    width: 50vw;
+    position: relative;
+    width: auto;
     height: 744px;
-    margin-top:5vw;
 
     background: #FFFFFF;
     box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.25);
@@ -116,6 +122,7 @@ td {
     justify-content: center;
 
     overflow: scroll;
+    padding-right: 5vw;
 }
 
 .box-data-display-queue {
@@ -157,8 +164,6 @@ td {
     display: flex;
     flex-direction: row;
     text-align: left;
-    margin-top: 20px;
-    padding-bottom: 10px;
 }
 
 .row-container {
@@ -302,13 +307,10 @@ td {
 }
 
 .button-ganti-password {
-    /* Rectangle 1 */
-
-    position: absolute;
-    width: 13vw;
+    position: relative;
+    width: 194px;
     height: 57px;
-    left: 25vw;
-    top: 389px;
+    /*left: 25vw;*/
 
     background: #F45F5C;
     mix-blend-mode: normal;
@@ -323,12 +325,9 @@ td {
 }
 .button-edit {
     /* Rectangle 1 */
-
-    position: absolute;
-    width: 10vw;
+    width: 194px;
     height: 57px;
-    left: 13vw;
-    top: 389px;
+    /*left: 13vw;*/
 
     background: #4FCD91;
     mix-blend-mode: normal;
@@ -339,6 +338,8 @@ td {
     font-style:normal;
     font-size: 18px;
     color: white;
+
+    margin-right: 2vw;
 }
 
 .masuk-text {
@@ -661,6 +662,17 @@ section#landing {
     margin: 30px 0 0 0;
 }
 
+section#user-dashboard {
+    background:url('header-bg.svg') no-repeat center center /
+    cover;
+    background-attachment: none;
+    justify-content: center;
+    height: 53vh;
+    width: 100vw;
+    border-radius:20px;
+    margin: 63px 0 0 0;
+}
+
 .special-card {
     width: 50%;
     margin-left: 6vw;
@@ -877,7 +889,7 @@ div .grey {
     justify-content: space-evenly;
     align-items: center;
     text-align: left;
-    min-height: 30vh;
+    margin: 7vh;
 }
 
 .input-container {
@@ -887,6 +899,23 @@ div .grey {
     align-items: center;
     text-align: left;
     margin-top: 20px;
+}
+
+.user-dashboard-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 10vw;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
 }
 
 .for-text {
@@ -915,7 +944,6 @@ div .grey {
     transition: padding ease-out 0.3s;
     font-size: 2res;
     outline: none;
-    margin: 10px;
 
 }
 
@@ -1080,11 +1108,21 @@ div .grey {
     margin-left: 10vw;
 }
 
+.enlarged-font {
+    font-size:1.5vw;
+}
+
 @media screen and (max-width: 600px) {
     .input-container {
         flex-direction: column;
         margin: 10px 0 0 0;
     }
+
+    .nav-container {
+        flex-direction: column;
+        margin: 10px 0 0 0;
+    }
+
 
     .custom-input {
         margin: 0 0 10px 0;
@@ -1110,7 +1148,28 @@ div .grey {
     }
 }
 
+/* Ipad Pro */
+@media screen and (max-width: 1024px) {
+    .container-permohonan-pendaftaran {
+        width: 75vw;
+    }
+    .box-data-display-queue {
+        width: 90%;
+    }
+}
+
+/* Motorolla */
 @media screen and (max-width: 415px) {
+    .container-permohonan-pendaftaran {
+        width: 95vw;
+    }
+
+    .review-button {
+        width:50%;
+    }
+    .enlarged-font {
+        font-size: 5vw;
+    }
     .login-container {
         margin-left: 0vw;
         width: 94vw;
@@ -1122,5 +1181,15 @@ div .grey {
 
     .navbar-brand.brand-margin {
         margin-left: 0vw;
+    }
+
+    .user-dashboard-button-container {
+        margin-left: 0vw;
+        flex-direction: column;
+    }
+
+    .button-edit {
+        margin-right: 0vw;
+        margin-bottom: 2vw;
     }
 }
