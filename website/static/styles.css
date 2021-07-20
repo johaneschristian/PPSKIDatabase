@@ -1138,7 +1138,7 @@ div .grey {
 }
 
 .enlarged-font {
-    font-size:1.5vw;
+    font-size:1.4em;
 }
 
 @media screen and (max-width: 600px) {
@@ -1301,8 +1301,9 @@ div .grey {
         width:50%;
     }
     .enlarged-font {
-        font-size: 5vw;
+        font-size: 1.4em;
     }
+
     .login-container {
         margin-left: 0vw;
         width: 94vw;
