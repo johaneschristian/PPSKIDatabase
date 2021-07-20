@@ -141,8 +141,6 @@ def displayTable():
                 keyword = request.form.get('keyword').strip()
                 page = 1
 
-            print("KW",keyword)
-
             if not request.form.get('provinsifilter'):
                 provinsifilter = ''
             else:
