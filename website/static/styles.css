@@ -359,19 +359,30 @@ td {
     color: #FFFFFF;
 }
 
+.container-data-font-bold {
+    font-size: 2em;
+    text-align:center;
+}
+.container-data-font-normal {
+    font-size: 1.5em;
+    text-align:center;
+}
 .container-data-anggota {
-    /* Rectangle 26 */
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 40vw;
-    height: 287px;
+    width: auto;
+    padding-top: 10px;
+    height: auto;
     top: 199px;
     background: #FFFFFF;
-    box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 20px 8px rgb(0 0 0 / 25%);
     border-radius: 20px;
-    margin-left: 27vw;
+    /* margin-left: 27vw; */
     align-items: center;
+    padding-bottom: 10px;
+    padding-right: 10vw;
+    padding-left: 10vw;
 }
 
 .back-button {
@@ -422,6 +433,23 @@ td {
     width: 125px;
     height: 52px;
     margin-top: 20px;
+
+    background: #F45F5C;
+    mix-blend-mode: normal;
+    border-radius: 5px;
+    border: none;
+
+    color: white;
+}
+
+.login-button-kembali {
+    /* Rectangle 1 */
+
+    position: relative;
+    width: 125px;
+    height: 52px;
+    margin-top: 20px;
+    top: 400px;
 
     background: #F45F5C;
     mix-blend-mode: normal;
@@ -484,19 +512,19 @@ td {
 }
 
 .display-info-box {
-    width: 17vw;  /* Previously 300px if block implementation is required 85vw*/
-    height: 200px;  /* Previously 200px */
+    width: 91.5vw;  /* Previously 300px if block implementation is required 85vw*/
+    height: auto;  /* Previously 200px */
     background: #2E68FF;
     border-radius: 20px;
-    margin: auto;
-    margin-left: 3.8vw;
-    margin-top: 10px;
+    /*margin: auto;*/
+    /*margin-left: 1vw;*/
+    margin-top: 18px;
     word-wrap: break-word;
     overflow: hidden;
     padding: 10px 5px 15px 5px;
     box-shadow: 0px 0px 13px 7px rgba(0, 0, 0, 0.25);
     border: none;
-    font-size:25px;
+    font-size:1em;
     font-weight:bold;
     color:white;
 }
@@ -1151,6 +1179,9 @@ div .grey {
 
 /* Ipad Pro */
 @media screen and (max-width: 1024px) {
+    .login-button-kembali {
+        top:450px;
+    }
     .container-cek-data {
         margin-top:-10vh;
     }
@@ -1201,6 +1232,22 @@ div .grey {
 }
 /* Motorolla */
 @media screen and (max-width: 415px) {
+    .container-data-anggota {
+        width: 90vw;
+    }
+
+    .container-data-font-normal {
+        font-size: 1em;
+    }
+
+    .login-button-kembali {
+        top:420px;
+    }
+
+    .container-data-font-bold {
+        font-size: 1.5em;
+    }
+
     .reset-button-edit {
         padding: 10px;
         margin-bottom: 10px;
@@ -1209,9 +1256,11 @@ div .grey {
     .container-cek-data {
         margin-top: 10vh;
     }
+
     .input-grey {
         width: 70vw;
     }
+
     .display-info-box {
         width: 87vw;
         height: 110px;

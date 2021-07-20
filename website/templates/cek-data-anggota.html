@@ -51,8 +51,7 @@
     {% for matching in matching_array %}
     <button class="display-info-box" onclick="window.location.href='/id-cek-data/{{ matching.id }}'">
         <span>{{ matching.nama_lengkap.upper()[0:15] }}</span><br/>
-        <span style="font-size:15px;font-weight:normal;">{{ matching.nama_tempat[0:25] }}</span><br/>
-        <span style="font-size:15px;font-weight:normal;">
+        <span style="font-size:15px;font-weight:normal;">{{ matching.nama_tempat[0:25] }} -
             {% if matching.kabupaten_kota != "#N/A" and matching.kabupaten_kota %}
                 {{ " ".join(matching.kabupaten_kota.split()[2:])[0:30] }}
             {% else %}
