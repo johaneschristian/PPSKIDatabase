@@ -245,7 +245,8 @@ td {
 
 .reset-button-edit {
     /* Rectangle 1 */
-    width: 10vw;
+    width: auto;
+    padding: 10px;
     height: 57px;
     background: #F45F5C;
     mix-blend-mode: normal;
@@ -1200,6 +1201,11 @@ div .grey {
 }
 /* Motorolla */
 @media screen and (max-width: 415px) {
+    .reset-button-edit {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
     .container-cek-data {
         margin-top: 10vh;
     }
