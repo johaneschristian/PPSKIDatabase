@@ -1231,8 +1231,8 @@ div .grey {
         font-size: 3vw;
     }
 }
-/* Motorolla */
-@media screen and (max-width: 415px) {
+/* Motorolla and surface duo */
+@media screen and (max-width: 540px) {
     .container-data-anggota {
         width: 90vw;
     }
