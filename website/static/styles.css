@@ -138,6 +138,9 @@ td {
     justify-items: center;
     justify-content: center;
     margin-top: 10px;
+
+    padding-bottom: 1vh;
+    padding-top: 1vh;
 }
 
 .container-ganti-password {
