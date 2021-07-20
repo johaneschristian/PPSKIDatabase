@@ -146,8 +146,12 @@
         <div class="input-container-with-label">
             <label for="kabkota">Kab/Kota</label>
             <select name="kabkota" id="kabkota" class="input-edit input-edit-editable">
-                <option selected="selected" value="{{ paramUser.kabupaten_kota }}">{{ paramUser.kabupaten_kota }}</option>
-                <option value="SomeKota">Some Kota</option>
+                <option selected="selected" value="{{ paramUser.kabupaten_kota }}">
+                    {{ " ".join(paramUser.kabupaten_kota.split()[1:]) }}
+                </option>
+                {% for kabkota in kumpulankabkota %}
+                <option value="{{ kabkota }}">{{ " ".join(kabkota.split()[1:]) }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>

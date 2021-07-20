@@ -165,7 +165,9 @@
             </select>
             <select name="kabkota" id="kabkota" class="custom-input">
                 <option selected="selected" disabled>Kota</option>
-                <option value="SomeKota">Some Kota</option>
+                {% for kabkota in kumpulankabkota %}
+                <option value="{{ kabkota }}">{{ " ".join(kabkota.split()[1:]) }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="input-container">

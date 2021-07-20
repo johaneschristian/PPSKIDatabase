@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from .auth import provinsi, db
+from .auth import provinsi, db, kumpulankabkota
 from .models import User, TemporaryUser
 import json, smtplib, ssl, sqlalchemy
 
@@ -51,7 +51,8 @@ def home():
         except sqlalchemy.exc.IntegrityError:
             flash("Akun surel sudah terdaftar di dalam database", category="error")
 
-    return render_template("beranda.html", provinsi=provinsi, accessing_user=current_user)
+    return render_template("beranda.html", provinsi=provinsi, accessing_user=current_user,
+                           kumpulankabkota=kumpulankabkota)
 
 
 @views.route('/cek-data-anggota', methods=["GET","POST"])
@@ -110,7 +111,8 @@ def userEdit():
             flash("Data Anda berhasil di update.")
             return redirect(url_for("views.userDashboard"))
     global provinsi
-    return render_template("user-edit.html", paramUser=current_user, provinsi=provinsi,  accessing_user=current_user)
+    return render_template("user-edit.html", paramUser=current_user, provinsi=provinsi,  kumpulankabkota=kumpulankabkota,
+                           accessing_user=current_user)
 
 
 @views.route('/admin-dashboard', methods=["GET","POST"])
@@ -131,12 +133,16 @@ def displayTable():
         if request.method == "GET":
             permanen = db.session.query(User)
 
-            return render_template("table.html", permanen=permanen,  accessing_user=current_user, provinsi=provinsi, count=permanen.count())
+            return render_template("table.html", permanen=permanen,  accessing_user=current_user, provinsi=provinsi,
+                                   kumpulankabkota=kumpulankabkota,
+                                   count=permanen.count())
         else:
             keyword = request.form.get('keyword').strip()
             provinsifilter = request.form.get('provinsifilter').strip()
             matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'), User.provinsi.like(f'%{provinsifilter}%'))
-            return render_template("table.html", permanen=matching_array, accessing_user=current_user, provinsi=provinsi, count=matching_array.count())
+            return render_template("table.html", permanen=matching_array, accessing_user=current_user,
+                                   provinsi=provinsi, kumpulankabkota=kumpulankabkota,
+                                   count=matching_array.count())
 
 
 
@@ -323,7 +329,9 @@ def adminEditUser(id):
     paramUser = User.query.get(id)
 
     if request.method == "GET":
-        return render_template(f"admin-user-edit.html", paramUser=paramUser, provinsi=provinsi,  accessing_user=current_user)
+        return render_template(f"admin-user-edit.html", paramUser=paramUser, provinsi=provinsi,
+                               kumpulankabkota=kumpulankabkota,
+                               accessing_user=current_user)
 
     elif request.method == "POST":
         pendidikan = request.form.get("pendidikan")
@@ -352,7 +360,9 @@ def adminEditUser(id):
             flash("Data Anda berhasil di update.")
             return redirect(url_for("views.displayTable"))
 
-    return render_template("admin-user-edit.html", paramUser=paramUser, provinsi=provinsi,  accessing_user=current_user)
+    return render_template("admin-user-edit.html", paramUser=paramUser, provinsi=provinsi,
+                           kumpulankabkota=kumpulankabkota,
+                           accessing_user=current_user)
 
 
 @views.route('/id-cek-data/<int:id>')
