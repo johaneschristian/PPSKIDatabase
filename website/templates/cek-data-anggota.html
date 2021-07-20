@@ -30,7 +30,7 @@
       {% endif %}
     {% endwith %}
     <div class="container-cek-data">
-    <div align="center">
+    <div align="center" style="margin-bottom:70px;">
         <br/><br/><br/>
         <h1 style="font-family:Montserrat;color:#2E68FF;font-size:36px;font-weight:black;">Cek Data Anggota</h1>
         <br/>
@@ -48,15 +48,17 @@
         </form>
     </div>
     <div class="container-fluid">
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
     {% for matching in matching_array %}
     <button class="display-info-box" onclick="window.location.href='/id-cek-data/{{ matching.id }}'">
-        <span>{{ matching.nama_lengkap.upper()[0:16] }}</span><br/>
-        <span style="font-size:15px;font-weight:normal;">{{ matching.nama_tempat }} - {{ matching.kabupaten_kota }}</span>
+        <span>{{ matching.nama_lengkap.upper()[0:15] }}</span><br/>
+        <span style="font-size:15px;font-weight:normal;">{{ matching.nama_tempat[0:25] }}</span><br/>
+        <span style="font-size:15px;font-weight:normal;">
+            {% if matching.kabupaten_kota != "#N/A" and matching.kabupaten_kota %}
+                {{ " ".join(matching.kabupaten_kota.split()[2:])[0:30] }}
+            {% else %}
+                EMPTY
+            {% endif %}
+        </span>
     </button>
     {% endfor %}
 
