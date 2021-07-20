@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block source %}<img src="\static\ppski-logo.png" alt="" style="width:55px;height:55px;">{% endblock %}
 {% block content %}
-<div class="register-container" style="margin-top: 5vw;height:1000px;">
+<div class="register-container" style="margin-top: 13vh;height:1000px;">
 <form method="POST">
     <br/>
     <h3 align="center" style="color:white;font-family:Montserrat;font-size:36px">REVIEW CALON</h3>
@@ -102,7 +102,7 @@
     </div>
 </form>
 <form method="POST">
-    <div class="input-container">
+    <div class="input-container" style="flex-direction:row;">
         <button class="back-button-edit" onclick="tolakCalon( {{ paramUser.id }} )">Tolak</button>
         <button class="save-button-edit" onclick="terimaCalon( {{ paramUser.id }} )">Terima</button>
     </div>
