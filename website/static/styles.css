@@ -129,7 +129,7 @@ td {
     /* Rectangle 13 */
 
     width: 40vw;
-    height: 88px;
+    height: auto;
     margin-left: 5vw;
 
     background: #2E68FF;
