@@ -16,6 +16,9 @@
         <div class="input-container">
             <select name="provinsifilter" id="provinsifilter" class="input-edit input-edit-editable">
                 <option value="">Provinsi</option>
+                {% if previous_provinsi %}
+                    <option value="{{ previous_provinsi }}" selected>{{ " ".join(previous_provinsi.split()[1:]) }}</option>
+                {% endif %}
                 {% for province in provinsi %}
                 <option value="{{ province }}">{{ " ".join(province.split()[1:]) }}</option>
                 {% endfor %}
@@ -32,21 +35,25 @@
         <div class="input-container" style="flex-direction:row;">
 <!--            <p style="margin-left:1.5vw;margin-bottom:0px;margin-right:4px;">Matching items: {{ count }}</p>-->
             <div class="input-container" style="flex-direction:row;margin-top:0px;margin-left:4px;">
-            {% for page_num in hasilPagination.iter_pages() %}
-                {% if page_num %}
-                    {% if page_num == hasilPagination.page %}
-                        <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:1px;" href="{{ url_for('views.displayTable', page=page_num, nama=previous_nama) }}">{{ page_num }}</a>
+                {% for page_num in hasilPagination.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num == hasilPagination.page %}
+                            <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:2px;"
+                               href="{{ url_for('views.displayTable', page=page_num,
+                               nama=previous_nama, provinsi=previous_provinsi) }}">{{ page_num }}</a>
+                        {% else %}
+                            <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:3px;"
+                               href="{{ url_for('views.displayTable', page=page_num,
+                               nama=previous_nama, provinsi=previous_provinsi ) }}">{{ page_num }}</a>
+                        {% endif %}
                     {% else %}
-                        <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:1px;" href="{{ url_for('views.displayTable', page=page_num, nama=previous_nama ) }}">{{ page_num }}</a>
+                        ...
                     {% endif %}
-                {% else %}
-                    ...
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
             </div>
         </div>
 
-        <div class="header-container" style="margin-top:15px;">
+        <div class="header-container" style="margin-top:7.5px;margin-bottom:7.5px;">
             <div class="row-container" style="margin-left:1vw;width:5vw;">No. Urut</div>
             <div class="row-container" style="margin-left:1vw;width:15vw;">Nama</div>
             <div class="row-container" style="margin-left:1vw;width:15vw;">Email</div>
@@ -58,7 +65,7 @@
             </div>
         </div>
         {% for user in permanen %}
-        <div class="table-rows" style="margin-top:15px;">
+        <div class="table-rows" style="margin-top:7.5px;margin-bottom:7.5px;">
             <div class="row-container" style="margin-left:1vw;width:5vw;font-size: 14px;">{{ user.id }}</div>
             <div class="row-container" style="margin-left:1vw;width:15vw;font-size: 14px;">{{ user.nama_lengkap }}</div>
             <div class="row-container" style="margin-left:1vw;width:15vw;font-size: 14px;">{{ user.email }}</div>

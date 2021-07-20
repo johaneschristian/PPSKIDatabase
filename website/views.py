@@ -133,6 +133,7 @@ def displayTable():
         if request.method == 'POST' or request.method == 'GET':
             page = request.args.get('page', 1, type=int)
             previous_nama = request.args.get('nama','',type=str)
+            previous_provinsi = request.args.get('provinsi','',type=str)
 
             if not request.form.get('keyword'):
                 keyword = previous_nama
@@ -142,12 +143,13 @@ def displayTable():
                 page = 1
 
             if not request.form.get('provinsifilter'):
-                provinsifilter = ''
+                provinsifilter = previous_provinsi
+
             else:
                 provinsifilter = request.form.get('provinsifilter').strip()
 
             matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
-                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page)
+                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page,per_page=10)
 
             hasilPagination = matching_array
             permanen = hasilPagination.items
@@ -157,7 +159,8 @@ def displayTable():
 
             return render_template("table.html", permanen=permanen,  accessing_user=current_user, provinsi=provinsi,
                                    kumpulankabkota=kumpulankabkota,
-                                   count=count, hasilPagination=hasilPagination, previous_nama=keyword)
+                                   count=count, hasilPagination=hasilPagination, previous_nama=keyword,
+                                   previous_provinsi=provinsifilter)
 
 
 
