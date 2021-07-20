@@ -221,6 +221,7 @@ td {
 .review-button {
     /* Rectangle 1 */
 
+    font-size: revert;
     width: 40%;
     height: 25px;
 
