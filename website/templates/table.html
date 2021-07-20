@@ -10,7 +10,7 @@
         <form method="POST">
         <div class="input-container">
             <input class="input-edit" placeholder="Nama Lengkap" id="keyword"
-            name="keyword"/>
+            name="keyword" value="{{ previous_nama }}"/>
             <button class="table-search-button" style="color:white;">CARI</button>
         </div>
         <div class="input-container">
@@ -28,7 +28,24 @@
             </select>
         </div>
         </form>
-        <p style="margin-left:1.5vw;">Matching items: {{ count }}</p>
+
+        <div class="input-container" style="flex-direction:row;">
+<!--            <p style="margin-left:1.5vw;margin-bottom:0px;margin-right:4px;">Matching items: {{ count }}</p>-->
+            <div class="input-container" style="flex-direction:row;margin-top:0px;margin-left:4px;">
+            {% for page_num in hasilPagination.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == hasilPagination.page %}
+                        <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:1px;" href="{{ url_for('views.displayTable', page=page_num, nama=previous_nama) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:1px;" href="{{ url_for('views.displayTable', page=page_num, nama=previous_nama ) }}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+
         <div class="header-container" style="margin-top:15px;">
             <div class="row-container" style="margin-left:1vw;width:5vw;">No. Urut</div>
             <div class="row-container" style="margin-left:1vw;width:15vw;">Nama</div>
@@ -54,5 +71,8 @@
         </div>
         {% endfor %}
     </div>
+
+
+
 </section>
 {% endblock %}

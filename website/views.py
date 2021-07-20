@@ -130,19 +130,37 @@ def displayTable():
         return "<p>Access Denied</p>"
     else:
         global provinsi
-        if request.method == "GET":
-            permanen = db.session.query(User)
+        if request.method == 'POST' or request.method == 'GET':
+            page = request.args.get('page', 1, type=int)
+            previous_nama = request.args.get('nama','',type=str)
+
+            if not request.form.get('keyword'):
+                keyword = previous_nama
+
+            else:
+                keyword = request.form.get('keyword').strip()
+                page = 1
+
+            print("KW",keyword)
+
+            if not request.form.get('provinsifilter'):
+                provinsifilter = ''
+            else:
+                provinsifilter = request.form.get('provinsifilter').strip()
+
+            matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
+                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page)
+
+            hasilPagination = matching_array
+            permanen = hasilPagination.items
+            count = len(permanen)
+
+            # permanen = db.session.query(User)
 
             return render_template("table.html", permanen=permanen,  accessing_user=current_user, provinsi=provinsi,
                                    kumpulankabkota=kumpulankabkota,
-                                   count=permanen.count())
-        else:
-            keyword = request.form.get('keyword').strip()
-            provinsifilter = request.form.get('provinsifilter').strip()
-            matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'), User.provinsi.like(f'%{provinsifilter}%'))
-            return render_template("table.html", permanen=matching_array, accessing_user=current_user,
-                                   provinsi=provinsi, kumpulankabkota=kumpulankabkota,
-                                   count=matching_array.count())
+                                   count=count, hasilPagination=hasilPagination, previous_nama=keyword)
+
 
 
 
