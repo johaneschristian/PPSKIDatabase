@@ -15,6 +15,7 @@ selectedUserID = None
 
 provinsi = provinsi
 
+
 @views.route('/', methods=["GET", "POST"])
 def home():
     if request.method == "POST":
@@ -36,12 +37,12 @@ def home():
               provinsiInput, kabupaten_kota, esai_singkat)
         try:
             newUser = TemporaryUser(status=status, email=email,
-                           password=generate_password_hash(password1), nama_lengkap=nama_lengkap,
-                           pendidikan=pendidikan, tempat_mengajar=tempat_mengajar,
-                           akun_facebook=akun_facebook, nomor_telepon=nomor_telepon,
-                           nama_tempat=nama_tempat,
-                           provinsi=provinsiInput, kabupaten_kota=kabupaten_kota,
-                           esai_singkat=esai_singkat)
+                                    password=generate_password_hash(password1), nama_lengkap=nama_lengkap,
+                                    pendidikan=pendidikan, tempat_mengajar=tempat_mengajar,
+                                    akun_facebook=akun_facebook, nomor_telepon=nomor_telepon,
+                                    nama_tempat=nama_tempat,
+                                    provinsi=provinsiInput, kabupaten_kota=kabupaten_kota,
+                                    esai_singkat=esai_singkat)
 
             db.session.add(newUser)
             db.session.commit()
@@ -55,7 +56,7 @@ def home():
                            kumpulankabkota=kumpulankabkota)
 
 
-@views.route('/cek-data-anggota', methods=["GET","POST"])
+@views.route('/cek-data-anggota', methods=["GET", "POST"])
 def cekAnggota():
     matching_array = []
 
@@ -63,7 +64,7 @@ def cekAnggota():
         keyword = request.form.get('nama').strip()
         matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'))
 
-    return render_template("cek-data-anggota.html", matching_array=matching_array,  accessing_user=current_user)
+    return render_template("cek-data-anggota.html", matching_array=matching_array, accessing_user=current_user)
 
 
 @views.route('/dashboard-navigator')
@@ -75,10 +76,10 @@ def dashboardNavigator():
         return redirect(url_for("views.userDashboard"))
 
 
-@views.route('/user-dashboard', methods=["GET","POST"])
+@views.route('/user-dashboard', methods=["GET", "POST"])
 @login_required
 def userDashboard():
-    return render_template("user-dashboard.html",  accessing_user=current_user)
+    return render_template("user-dashboard.html", accessing_user=current_user)
 
 
 @views.route('/edit-profil', methods=["GET", "POST"])
@@ -111,17 +112,17 @@ def userEdit():
             flash("Data Anda berhasil di update.")
             return redirect(url_for("views.userDashboard"))
     global provinsi
-    return render_template("user-edit.html", paramUser=current_user, provinsi=provinsi,  kumpulankabkota=kumpulankabkota,
+    return render_template("user-edit.html", paramUser=current_user, provinsi=provinsi, kumpulankabkota=kumpulankabkota,
                            accessing_user=current_user)
 
 
-@views.route('/admin-dashboard', methods=["GET","POST"])
+@views.route('/admin-dashboard', methods=["GET", "POST"])
 def adminDashboard():
     if current_user.status != "admin":
         return "<p>Access Denied</p>"
     if request.method == "POST":
         pass
-    return render_template("admin-dashboard.html",  accessing_user=current_user)
+    return render_template("admin-dashboard.html", accessing_user=current_user)
 
 
 @views.route('/table-display', methods=["GET", "POST"])
@@ -132,24 +133,30 @@ def displayTable():
         global provinsi
         if request.method == 'POST' or request.method == 'GET':
             page = request.args.get('page', 1, type=int)
-            previous_nama = request.args.get('nama','',type=str)
-            previous_provinsi = request.args.get('provinsi','',type=str)
+            previous_nama = request.args.get('nama', '', type=str)
+            previous_provinsi = request.args.get('provinsi', '', type=str)
 
             if not request.form.get('keyword'):
-                keyword = previous_nama
+                keyword = ''
 
-            else:
+            elif request.form.get('keyword') != previous_nama:
                 keyword = request.form.get('keyword').strip()
                 page = 1
 
-            if not request.form.get('provinsifilter'):
-                provinsifilter = previous_provinsi
-
             else:
+                keyword = previous_nama
+
+            if not request.form.get('provinsifilter'):
+                provinsifilter = ''
+            elif request.form.get('provinsifilter') != previous_provinsi:
                 provinsifilter = request.form.get('provinsifilter').strip()
 
+            else:
+                provinsifilter = previous_provinsi
+
             matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
-                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page,per_page=10)
+                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(
+                page=page, per_page=10)
 
             hasilPagination = matching_array
             permanen = hasilPagination.items
@@ -157,21 +164,19 @@ def displayTable():
 
             # permanen = db.session.query(User)
 
-            return render_template("table.html", permanen=permanen,  accessing_user=current_user, provinsi=provinsi,
+            return render_template("table.html", permanen=permanen, accessing_user=current_user, provinsi=provinsi,
                                    kumpulankabkota=kumpulankabkota,
                                    count=count, hasilPagination=hasilPagination, previous_nama=keyword,
                                    previous_provinsi=provinsifilter)
-
-
 
 
 @views.route('/registration-queue', methods=["GET", "POST"])
 def registrationQueue():
     if request.method == "GET":
         temporer = db.session.query(TemporaryUser)
-        return render_template("registration-queue.html", temporer=temporer,  accessing_user=current_user)
+        return render_template("registration-queue.html", temporer=temporer, accessing_user=current_user)
 
-    return render_template("registration-queue.html",  accessing_user=current_user)
+    return render_template("registration-queue.html", accessing_user=current_user)
 
 
 @views.route('/select-user', methods=["POST"])
@@ -228,12 +233,12 @@ def terimaAnggota():
     if user:
         user.status = "direview"
         accepted = User(status="permanen", email=user.email,
-                      password=user.password, nama_lengkap=user.nama_lengkap,
-                      pendidikan=user.pendidikan, tempat_mengajar=user.tempat_mengajar,
-                      akun_facebook=user.akun_facebook, nomor_telepon=user.nomor_telepon,
-                      nama_tempat=user.nama_tempat,
-                      provinsi=user.provinsi, kabupaten_kota=user.kabupaten_kota,
-                      esai_singkat=user.esai_singkat)
+                        password=user.password, nama_lengkap=user.nama_lengkap,
+                        pendidikan=user.pendidikan, tempat_mengajar=user.tempat_mengajar,
+                        akun_facebook=user.akun_facebook, nomor_telepon=user.nomor_telepon,
+                        nama_tempat=user.nama_tempat,
+                        provinsi=user.provinsi, kabupaten_kota=user.kabupaten_kota,
+                        esai_singkat=user.esai_singkat)
         db.session.add(accepted)
         db.session.commit()
         flash("Penerimaan berhasil", category="success")
@@ -303,7 +308,7 @@ def bundleSend():
     return redirect(url_for("views.adminDashboard"))
 
 
-@views.route('/ganti-password', methods=["GET","POST"])
+@views.route('/ganti-password', methods=["GET", "POST"])
 @login_required
 def gantiPassword():
     if request.method == "POST":
@@ -323,7 +328,7 @@ def gantiPassword():
             flash("Konfirmasi password tidak sesuai", category="error")
 
         elif not condition:
-            pass    # Check for condition
+            pass  # Check for condition
 
         else:
             current_user.password = generate_password_hash(newpassword)
@@ -343,7 +348,7 @@ def adminSelectedUser():
         return jsonify({})
 
 
-@views.route('/admin-edit-user/<int:id>', methods=["GET","POST"])
+@views.route('/admin-edit-user/<int:id>', methods=["GET", "POST"])
 def adminEditUser(id):
     paramUser = User.query.get(id)
 
@@ -387,4 +392,4 @@ def adminEditUser(id):
 @views.route('/id-cek-data/<int:id>')
 def id_cek_data(id):
     user = User.query.get(id)
-    return render_template("id-cek-data.html", user=user,  accessing_user=current_user)
+    return render_template("id-cek-data.html", user=user, accessing_user=current_user)
