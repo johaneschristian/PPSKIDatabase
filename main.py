@@ -8,6 +8,5 @@ app = create_app()
 def page_not_found(e):
     return redirect(url_for("views.home"))
 
-
 if __name__ == "__main__":
     app.run(debug=True)
