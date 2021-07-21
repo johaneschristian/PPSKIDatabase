@@ -12,7 +12,6 @@ calon_diterima = set()
 
 provinsi = provinsi
 
-
 @views.route('/', methods=["GET", "POST"])
 def home():
     if request.method == "POST":
@@ -118,8 +117,10 @@ def userEdit():
 def adminDashboard():
     if current_user.status != "admin":
         return "<p>Access Denied</p>"
+
     if request.method == "POST":
         pass
+
     return render_template("admin-dashboard.html", accessing_user=current_user)
 
 

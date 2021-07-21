@@ -56,22 +56,29 @@
           <div class="navbar-nav ml-auto" >
             <div class="nav-container">
               {% if accessing_user.is_authenticated %}
-              <div class="nav-container">
-                <a class="nav-item nav-link px-5" id="user-dashboard" style="color:white;" href="/dashboard-navigator">Dashboard</a>
-              </div>
-              <div class="nav-container" style="width:180px;">
-                <a class="nav-item nav-link px-3 enclosing-box-keluar" id="keluar" style="color:white;" href="/keluar">Keluar</a>
-              </div>
+                {% if accessing_user.status == "admin" %}
+                  <div class="nav-container">
+                  <a class="nav-item nav-link px-5" id="personal-dashboard" style="color:white;" href="/user-dashboard">
+                    Personal Dashboard
+                  </a>
+                </div>
+              {% endif %}
+                <div class="nav-container">
+                  <a class="nav-item nav-link px-5" id="user-dashboard" style="color:white;" href="/dashboard-navigator">Dashboard</a>
+                </div>
+                <div class="nav-container" style="width:180px;">
+                  <a class="nav-item nav-link px-3 enclosing-box-keluar" id="keluar" style="color:white;" href="/keluar">Keluar</a>
+                </div>
               {% else %}
-              <div class="nav-container">
-                <a class="nav-item nav-link px-5" style="color:white" id="beranda" href="/">Beranda</a>
-              </div>
-              <div class="nav-container">
-                <a class="nav-item nav-link px-5" style="color:white;" id="cek_data_diri" href="/cek-data-anggota">Data Anggota</a>
-              </div>
-              <div class="nav-container" style="width:180px;">
-                <a class="nav-item nav-link enclosing-box px-3" style="color:#4b7ef2;" id="masuk" href="/masuk">Masuk</a>
-              </div>
+                <div class="nav-container">
+                  <a class="nav-item nav-link px-5" style="color:white" id="beranda" href="/">Beranda</a>
+                </div>
+                <div class="nav-container">
+                  <a class="nav-item nav-link px-5" style="color:white;" id="cek_data_diri" href="/cek-data-anggota">Data Anggota</a>
+                </div>
+                <div class="nav-container" style="width:180px;">
+                  <a class="nav-item nav-link enclosing-box px-3" style="color:#4b7ef2;" id="masuk" href="/masuk">Masuk</a>
+                </div>
               {% endif %}
             </div>
           </div>
