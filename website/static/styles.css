@@ -210,7 +210,9 @@ td {
 .details-button {
     /* Rectangle 1 */
 
-    width: 40%;
+    width: auto;
+    padding-left:10px;
+    padding-right:10px;
     height: 25px;
 
     color: white;

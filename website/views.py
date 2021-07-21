@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from .auth import provinsi, db, kumpulankabkota
 from .models import User, TemporaryUser
 import json, smtplib, ssl, sqlalchemy
+import datetime
 
 views = Blueprint('views', __name__)
 
@@ -11,6 +12,16 @@ calon_ditolak = set()
 calon_diterima = set()
 
 provinsi = provinsi
+
+
+def generateID(paramProvinsi, tahunRegistrasi, nomorUrut, kabkota):
+    provinsiKey = paramProvinsi.split()[0]
+    kabkota = kabkota.split()[0]
+    tahunEmbed = tahunRegistrasi % 100
+    nomorEmbed = nomorUrut % 10000
+    return provinsiKey + str(tahunEmbed) + str(nomorEmbed).zfill(4) + \
+        kabkota
+
 
 @views.route('/', methods=["GET", "POST"])
 def home():
@@ -42,6 +53,7 @@ def home():
 
             db.session.add(newUser)
             db.session.commit()
+
             flash("Berhasil Mendaftar!", category="success")
             return redirect(url_for("auth.telahMendaftar"))
 
@@ -241,8 +253,12 @@ def terimaAnggota(id_number):
                         akun_facebook=user.akun_facebook, nomor_telepon=user.nomor_telepon,
                         nama_tempat=user.nama_tempat,
                         provinsi=user.provinsi, kabupaten_kota=user.kabupaten_kota,
-                        esai_singkat=user.esai_singkat)
+                        esai_singkat=user.esai_singkat, id_ppski=user.id_ppski)
         db.session.add(accepted)
+        db.session.commit()
+        year = datetime.datetime.now().year
+        id_ppski = generateID(accepted.provinsi, year, accepted.id, accepted.kabupaten_kota)
+        accepted.id_ppski = id_ppski
         db.session.commit()
         flash("Penerimaan berhasil", category="success")
 
