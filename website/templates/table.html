@@ -38,11 +38,11 @@
                 {% for page_num in hasilPagination.iter_pages() %}
                     {% if page_num %}
                         {% if page_num == hasilPagination.page %}
-                            <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:2px;"
+                            <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:2px;margin-right:2px;"
                                href="{{ url_for('views.displayTable', page=page_num,
                                nama=previous_nama, provinsi=previous_provinsi) }}">{{ page_num }}</a>
                         {% else %}
-                            <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:3px;"
+                            <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:2px;margin-right:2px;"
                                href="{{ url_for('views.displayTable', page=page_num,
                                nama=previous_nama, provinsi=previous_provinsi ) }}">{{ page_num }}</a>
                         {% endif %}

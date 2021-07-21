@@ -10,9 +10,6 @@ views = Blueprint('views', __name__)
 calon_ditolak = set()
 calon_diterima = set()
 
-selectedTemporaryID = None
-selectedUserID = None
-
 provinsi = provinsi
 
 
@@ -117,6 +114,7 @@ def userEdit():
 
 
 @views.route('/admin-dashboard', methods=["GET", "POST"])
+@login_required
 def adminDashboard():
     if current_user.status != "admin":
         return "<p>Access Denied</p>"
@@ -126,52 +124,59 @@ def adminDashboard():
 
 
 @views.route('/table-display', methods=["GET", "POST"])
+@login_required
 def displayTable():
     if current_user.status != "admin":
         return "<p>Access Denied</p>"
     else:
         global provinsi
-        if request.method == 'POST' or request.method == 'GET':
-            page = request.args.get('page', 1, type=int)
+
+        page = request.args.get('page', 1, type=int)
+
+        # Request method is GET when the user access table for the first time or traversing pagination (in this case,
+        # the query filter is the previous or empty)
+        if request.method == 'GET':
             previous_nama = request.args.get('nama', '', type=str)
             previous_provinsi = request.args.get('provinsi', '', type=str)
+            keyword = previous_nama
+            provinsifilter = previous_provinsi
 
+        # Request method is POST when the user access the table with new queries, the page is restarted to 1
+        else:
+            # Set keyword to empty string if there exist no keyword filter
             if not request.form.get('keyword'):
                 keyword = ''
-
-            elif request.form.get('keyword') != previous_nama:
-                keyword = request.form.get('keyword').strip()
-                page = 1
-
             else:
-                keyword = previous_nama
+                keyword = request.form.get('keyword').strip()
 
             if not request.form.get('provinsifilter'):
                 provinsifilter = ''
-            elif request.form.get('provinsifilter') != previous_provinsi:
+            else:
                 provinsifilter = request.form.get('provinsifilter').strip()
 
-            else:
-                provinsifilter = previous_provinsi
+            page = 1
 
-            matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
-                                                           User.provinsi.like(f'%{provinsifilter}%')).paginate(
-                page=page, per_page=10)
+        matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
+                        User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page, per_page=10)
 
-            hasilPagination = matching_array
-            permanen = hasilPagination.items
-            count = len(permanen)
+        hasilPagination = matching_array
+        permanen = hasilPagination.items
+        count = len(permanen)
 
-            # permanen = db.session.query(User)
+        # permanen = db.session.query(User)
 
-            return render_template("table.html", permanen=permanen, accessing_user=current_user, provinsi=provinsi,
-                                   kumpulankabkota=kumpulankabkota,
-                                   count=count, hasilPagination=hasilPagination, previous_nama=keyword,
-                                   previous_provinsi=provinsifilter)
+        return render_template("table.html", permanen=permanen, accessing_user=current_user, provinsi=provinsi,
+                               kumpulankabkota=kumpulankabkota,
+                               count=count, hasilPagination=hasilPagination, previous_nama=keyword,
+                               previous_provinsi=provinsifilter)
 
 
 @views.route('/registration-queue', methods=["GET", "POST"])
+@login_required
 def registrationQueue():
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
+
     if request.method == "GET":
         temporer = db.session.query(TemporaryUser)
         return render_template("registration-queue.html", temporer=temporer, accessing_user=current_user)
@@ -179,18 +184,13 @@ def registrationQueue():
     return render_template("registration-queue.html", accessing_user=current_user)
 
 
-@views.route('/select-user', methods=["POST"])
-def selectUser():
-    global selectedTemporaryID
-    data = json.loads(request.data)
-    selectedTemporaryID = data["userID"]
-    return jsonify({})
+@views.route('/review-calon/<int:id>', methods=["GET", "POST"])
+@login_required
+def reviewCalon(id):
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
 
-
-@views.route('/review-calon', methods=["GET", "POST"])
-def reviewCalon():
-    global selectedTemporaryID
-    paramUser = TemporaryUser.query.get(selectedTemporaryID)
+    paramUser = TemporaryUser.query.get(id)
     return render_template("review-calon.html", paramUser=paramUser, accessing_user=current_user)
 
 
@@ -211,24 +211,26 @@ def deleteUser(id):
     return redirect(url_for('views.displayTable'))
 
 
-@views.route('/tolak-calon', methods=["POST"])
-def tolakCalon():
-    data = json.loads(request.data)
-    deletedId = data["userID"]
-    user = TemporaryUser.query.get(deletedId)
+@views.route('/tolak-calon/<int:id_number>', methods=["GET"])
+@login_required
+def tolakCalon(id_number):
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
+    user = TemporaryUser.query.get(id_number)
     calon_ditolak.add(user.email)
     if user:
         db.session.delete(user)
         db.session.commit()
 
-    return jsonify({})
+    return redirect(url_for("views.registrationQueue"))
 
 
-@views.route('/terima-calon', methods=["POST"])
-def terimaAnggota():
-    data = json.loads(request.data)
-    acceptedId = data["userID"]
-    user = TemporaryUser.query.get(acceptedId)
+@views.route('/terima-calon/<int:id_number>', methods=["GET"])
+@login_required
+def terimaAnggota(id_number):
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
+    user = TemporaryUser.query.get(id_number)
     calon_diterima.add(user.email)
     if user:
         user.status = "direview"
@@ -243,7 +245,7 @@ def terimaAnggota():
         db.session.commit()
         flash("Penerimaan berhasil", category="success")
 
-    return jsonify({})
+    return redirect(url_for("views.registrationQueue"))
 
 
 def addtoSet(email):
@@ -290,7 +292,11 @@ def temp():
 
 
 @views.route('/kirim-hasil-review', methods=["GET"])
+@login_required
 def bundleSend():
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
+
     global calon_diterima, calon_ditolak
 
     for user in calon_diterima:
@@ -339,17 +345,12 @@ def gantiPassword():
     return render_template("ganti-password.html", paramUser=current_user, accessing_user=current_user)
 
 
-@views.route('/admin-select-user', methods=["POST"])
-def adminSelectedUser():
-    global selectedUserID
-    if request.method == "POST":
-        data = json.loads(request.data)
-        selectedUserID = data["userID"]
-        return jsonify({})
-
-
 @views.route('/admin-edit-user/<int:id>', methods=["GET", "POST"])
+@login_required
 def adminEditUser(id):
+    if current_user.status != "admin":
+        return "<p>Access Denied</p>"
+
     paramUser = User.query.get(id)
 
     if request.method == "GET":

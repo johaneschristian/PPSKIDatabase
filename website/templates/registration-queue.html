@@ -41,7 +41,8 @@
                     <p class="enlarged-font" style="font-family:Montserrat;font-style:normal;">No {{ user.id }} - {{ user.nama_lengkap }}</p>
                 </div>
                 <div class="review-container" style="justify-content:flex-end;width:50%;margin-right:2%;margin-top:3.8%;">
-                    <input type="submit" class="review-button" value="Review" style="color:white;background-color:black;" onclick="reviewSelected( {{ user.id }} )" />
+                    <input type="submit" class="review-button" value="Review" style="color:white;background-color:black;"
+                           onclick="window.location.href='/review-calon/{{ user.id }}'" />
                 </div>
             </div>
         </div>

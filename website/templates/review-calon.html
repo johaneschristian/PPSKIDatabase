@@ -101,11 +101,11 @@
         rows="10" cols="50" style="width:98%" disabled></textarea>
     </div>
 </form>
-<form method="POST">
-    <div class="input-container" style="flex-direction:row;">
-        <button class="back-button-edit" onclick="tolakCalon( {{ paramUser.id }} )">Tolak</button>
-        <button class="save-button-edit" onclick="terimaCalon( {{ paramUser.id }} )">Terima</button>
-    </div>
-</form>
+
+<div class="input-container" style="flex-direction:row;">
+    <button class="back-button-edit" onclick="window.location.href='/tolak-calon/{{ paramUser.id }}'">Tolak</button>
+    <button class="save-button-edit" onclick="window.location.href='/terima-calon/{{ paramUser.id }}'">Terima</button>
+</div>
+
 </div>
 {% endblock %}
