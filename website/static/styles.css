@@ -610,7 +610,7 @@ section {
 }
 
 section#table {
-    height: 120vh;
+    height: 150vh;
     background: url('mostly-bg.svg') no-repeat center center /
     cover;
     align-items: center;
