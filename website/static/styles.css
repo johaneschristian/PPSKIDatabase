@@ -148,7 +148,8 @@ td {
 
     position: relative;
     width: 30vw;
-    height: 493px;
+    height: auto;
+    padding-bottom: 30px;
     /*left: 37.5vw;*/
     margin-top: 40px;
 
@@ -297,6 +298,8 @@ td {
 .input-edit-editable {
     background: #DDDDDD;
 }
+
+.table-special {}
 
 .enclosing-box-keluar {
     border-radius: 20px;
@@ -1149,6 +1152,21 @@ div .grey {
 }
 
 @media screen and (max-width: 600px) {
+    .table-special {
+        margin-bottom:10px;
+        margin-right: 0;
+    }
+
+    .row-container {
+        width: fit-content !important;
+    }
+
+    .table-search-button {
+        width:20vw;
+        margin-top:10px;
+        font-size:5vw;
+    }
+
     .input-container {
         flex-direction: column;
         margin: 10px 0 0 0;
