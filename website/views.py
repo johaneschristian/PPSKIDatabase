@@ -67,12 +67,15 @@ def home():
 @views.route('/cek-data-anggota', methods=["GET", "POST"])
 def cekAnggota():
     matching_array = []
-
+    cari_nama = ""
     if request.method == "POST":
         keyword = request.form.get('nama').strip()
-        matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'))
+        if not len(keyword) < 2:
+            matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'))
+            cari_nama = keyword
 
-    return render_template("cek-data-anggota.html", matching_array=matching_array, accessing_user=current_user)
+    return render_template("cek-data-anggota.html", matching_array=matching_array, accessing_user=current_user,
+                           cari_nama=cari_nama)
 
 
 @views.route('/dashboard-navigator')
@@ -151,8 +154,10 @@ def displayTable():
         if request.method == 'GET':
             previous_nama = request.args.get('nama', '', type=str)
             previous_provinsi = request.args.get('provinsi', '', type=str)
+            previous_kota = request.args.get('kabupaten_kota', '', type=str)
             keyword = previous_nama
             provinsifilter = previous_provinsi
+            kotafilter = previous_kota
 
         # Request method is POST when the user access the table with new queries, the page is restarted to 1
         else:
@@ -167,10 +172,18 @@ def displayTable():
             else:
                 provinsifilter = request.form.get('provinsifilter').strip()
 
+            if not request.form.get('kotafilter'):
+                kotafilter = ''
+            else:
+                kotafilter = request.form.get('kotafilter').strip()
+
             page = 1
 
         matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
-                        User.provinsi.like(f'%{provinsifilter}%')).paginate(page=page, per_page=10)
+                        User.provinsi.like(f'%{provinsifilter}%'),
+                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page, per_page=10)
+
+        print(provinsifilter, kotafilter)
 
         hasilPagination = matching_array
         permanen = hasilPagination.items
@@ -181,7 +194,7 @@ def displayTable():
         return render_template("table.html", permanen=permanen, accessing_user=current_user, provinsi=provinsi,
                                kumpulankabkota=kumpulankabkota,
                                count=count, hasilPagination=hasilPagination, previous_nama=keyword,
-                               previous_provinsi=provinsifilter)
+                               previous_provinsi=provinsifilter, previous_kota=kotafilter)
 
 
 @views.route('/registration-queue', methods=["GET", "POST"])

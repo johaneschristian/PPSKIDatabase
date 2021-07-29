@@ -23,10 +23,13 @@
                 <option value="{{ province }}">{{ " ".join(province.split()[1:]) }}</option>
                 {% endfor %}
             </select>
-            <select name="somefilter" id="somefilter" class="input-edit input-edit-editable table-special">
-                <option value=""></option>
-                {% for province in provinsi %}
-                <option value="{{ province }}">{{ " ".join(province.split()[1:]) }}</option>
+            <select name="kotafilter" id="kotafilter" class="input-edit input-edit-editable table-special">
+                <option value="">Kabupaten Kota</option>
+                {% if previous_kota %}
+                    <option value="{{ previous_kota }}" selected>{{ " ".join(previous_kota.split()[1:]) }}</option>
+                {% endif %}
+                {% for kabkota in kumpulankabkota %}
+                <option value="{{ kabkota }}">{{ " ".join(kabkota.split()[1:]) }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -40,11 +43,13 @@
                         {% if page_num == hasilPagination.page %}
                             <a class="btn btn-success" style="background:#4FCD91;color:white;margin-left:2px;margin-right:2px;"
                                href="{{ url_for('views.displayTable', page=page_num,
-                               nama=previous_nama, provinsi=previous_provinsi) }}">{{ page_num }}</a>
+                               nama=previous_nama, provinsi=previous_provinsi,
+                               kabupaten_kota=previous_kota) }}">{{ page_num }}</a>
                         {% else %}
                             <a class="btn btn-primary" style="background:#2E68FF;color:white;margin-left:2px;margin-right:2px;"
                                href="{{ url_for('views.displayTable', page=page_num,
-                               nama=previous_nama, provinsi=previous_provinsi ) }}">{{ page_num }}</a>
+                               nama=previous_nama, provinsi=previous_provinsi,
+                               kabupaten_kota=previous_kota) }}">{{ page_num }}</a>
                         {% endif %}
                     {% else %}
                         ...

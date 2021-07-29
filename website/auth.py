@@ -8,7 +8,7 @@ import csv
 
 auth = Blueprint('auth', __name__)
 provinsi = \
-    ["AC Aceh",
+    ["AC NANGRO ACEH DARUSSALAM",
      "SU Sumatera Utara",
      "SB Sumatera Barat",
      "RI Riau",
@@ -18,10 +18,10 @@ provinsi = \
      "LA Lampung",
      "BB Kepulauan Bangka Belitung",
      "KR Kepulauan Riau",
-     "JK DKI Jakarta",
+     "JK D.K.I. JAKARTA",
      "JB Jawa Barat",
      "JT Jawa Tengah",
-     "YO DI Yogyakarta",
+     "YO D.I. YOGYAKARTA",
      "JI Jawa Timur",
      "BT Banten",
      "BA Bali",
