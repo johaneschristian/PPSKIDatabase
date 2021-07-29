@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Sebaran Anggota{% endblock %}
+{% block source %}<img src="\static\ppski-logo.png" alt="" style="width:55px;height:55px;">{% endblock %}
+{% block content %}
+<section id="pemetaan-anggota">
+    <h1 style="text-align:center;font-family:Montserrat;">Sebaran Anggota</h1>
+    <div class="input-container">
+        <div class="input-container-with-label" style="margin:15px;width:100%;">
+            <h4 style="font-weight:bold;">Provinsi</h4>
+            <div class="pemetaan-container">
+                {% for data in jumlah_per_provinsi %}
+                    <div class="container-data-pemetaan">
+                        <div class="review-container" style="width:50%;justify-content:flex-start;">
+                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
+                        </div>
+                        <div class="review-container" style="width:50%;justify-content:flex-end;">
+                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="input-container-with-label" style="margin:15px;width:100%;">
+            <h4 style="font-weight:bold;">Pendidikan Terakhir</h4>
+            <div class="pemetaan-container">
+                {% for data in pendidikan_terakhir %}
+                    <div class="container-data-pemetaan">
+                        <div class="review-container" style="width:50%;justify-content:flex-start;">
+                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
+                        </div>
+                        <div class="review-container" style="width:50%;justify-content:flex-end;">
+                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="input-container-with-label" style="margin:15px;width:100%;">
+            <h4 style="font-weight:bold;">Jenjang Tempat Mengajar</h4>
+            <div class="pemetaan-container">
+                {% for data in jenjang_tempat_mengajar %}
+                    <div class="container-data-pemetaan">
+                        <div class="review-container" style="width:50%;justify-content:flex-start;">
+                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
+                        </div>
+                        <div class="review-container" style="width:50%;justify-content:flex-end;">
+                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

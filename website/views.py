@@ -14,6 +14,43 @@ calon_diterima = set()
 provinsi = provinsi
 
 
+@views.route('/ringkasan-anggota')
+def ringkasanAngggota():
+    jenis_pendidikan_terakhir = ['S1 Pendidikan Kimia',
+                                 'S1 Kimia Sains',
+                                 'S1 Teknik Kimia',
+                                 'S2 Pendidikan Kimia',
+                                 'S2 Kimia Sains',
+                                 'S2 Teknik Kimia',
+                                 'S3 Pendidikan Kimia',
+                                 'S3 Kimia Sains',
+                                 'S3 Teknik Kimia']
+
+    jenis_tempat_mengajar = [
+        'SMA/MA',
+        'SMK/MAK',
+        'Perguruan Tinggi',
+        'Pend. nonformal jenjang SMA atau lebih tinggi'
+    ]
+
+    jumlah_per_provinsi = []
+    jenjang_tempat_mengajar = []
+    pendidikan_terakhir = []
+
+    for p in provinsi:
+        jumlah_per_provinsi.append((p,db.session.query(User).filter(User.provinsi.like(f'%{p}%')).count()))
+
+    for j in jenis_pendidikan_terakhir:
+        pendidikan_terakhir.append((j, db.session.query(User).filter(User.pendidikan.like(f'{j}')).count()))
+
+    for i in jenis_tempat_mengajar:
+        jenjang_tempat_mengajar.append((i, db.session.query(User).filter(User.tempat_mengajar.like(f'{i}')).count()))
+
+    return render_template('ringkasan-anggota.html', jumlah_per_provinsi=jumlah_per_provinsi,
+                           pendidikan_terakhir=pendidikan_terakhir,
+                           jenjang_tempat_mengajar=jenjang_tempat_mengajar,
+                           accessing_user=current_user)
+
 def generateID(paramProvinsi, tahunRegistrasi, nomorUrut, kabkota):
     provinsiKey = paramProvinsi.split()[0]
     kabkota = kabkota.split()[0]
