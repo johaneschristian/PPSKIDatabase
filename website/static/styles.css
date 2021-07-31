@@ -1,3 +1,23 @@
+.with-margin {
+    margin-left:20px;
+}
+
+.graph {
+    width:100%;
+    height:25vw;
+    border-radius: 20px;
+}
+
+.container-sebaran {
+    /*background: black;*/
+    border-radius: 20px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:20px;
+    overflow: scroll;
+    margin-top:20px;
+}
+
 .pemetaan-container {
     width: 100%;
     padding: 20px;
@@ -16,10 +36,18 @@
     justify-content: center;
     height: auto;
     border-radius: 20px;
+    border: none;
     overflow: scroll;
     padding-bottom: 40px;
     margin-top: 2vh;
     padding:2vh;
+    transition: 0.3s;
+}
+
+.with-hover:hover {
+    background: black;
+    color: white;
+
 }
 
 .justifier-container {
@@ -656,11 +684,11 @@ section {
 
 section#pemetaan-anggota {
     margin-top: 10vh;
-    height: 100vh;
+    height: auto;
 }
 
 section#table {
-    height: 150vh;
+    height: 100vh;
     background: url('mostly-bg.svg') no-repeat center center /
     cover;
     align-items: center;
@@ -1204,6 +1232,10 @@ div .grey {
         margin-right: 0;
     }
 
+    .with-margin {
+        margin-left: 0;
+    }
+
     .row-container {
         width: fit-content !important;
     }
@@ -1279,6 +1311,16 @@ div .grey {
     .red-search-button {
         width: 12vw;
         font-size: 2vw;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .ringkasan-sp {
+        flex-direction: column  !important;
+    }
+
+    .sp {
+        /*height:200px;*/
     }
 }
 

@@ -14,7 +14,7 @@ calon_diterima = set()
 provinsi = provinsi
 
 
-@views.route('/ringkasan-anggota')
+@views.route('/ringkasan-anggota', methods=["GET", "POST"])
 def ringkasanAngggota():
     jenis_pendidikan_terakhir = ['S1 Pendidikan Kimia',
                                  'S1 Kimia Sains',
@@ -36,6 +36,7 @@ def ringkasanAngggota():
     jumlah_per_provinsi = []
     jenjang_tempat_mengajar = []
     pendidikan_terakhir = []
+    jumlah_anggota = db.session.query(User).count()
 
     for p in provinsi:
         jumlah_per_provinsi.append((p,db.session.query(User).filter(User.provinsi.like(f'%{p}%')).count()))
@@ -49,7 +50,9 @@ def ringkasanAngggota():
     return render_template('ringkasan-anggota.html', jumlah_per_provinsi=jumlah_per_provinsi,
                            pendidikan_terakhir=pendidikan_terakhir,
                            jenjang_tempat_mengajar=jenjang_tempat_mengajar,
-                           accessing_user=current_user)
+                           accessing_user=current_user,
+                           jumlah_anggota=jumlah_anggota)
+
 
 def generateID(paramProvinsi, tahunRegistrasi, nomorUrut, kabkota):
     provinsiKey = paramProvinsi.split()[0]
@@ -218,7 +221,7 @@ def displayTable():
 
         matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
                         User.provinsi.like(f'%{provinsifilter}%'),
-                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page, per_page=10)
+                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page, per_page=20)
 
         print(provinsifilter, kotafilter)
 

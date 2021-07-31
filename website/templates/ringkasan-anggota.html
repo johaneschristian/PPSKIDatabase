@@ -1,56 +1,139 @@
 {% extends "base.html" %}
 {% block title %}Sebaran Anggota{% endblock %}
 {% block source %}<img src="\static\ppski-logo.png" alt="" style="width:55px;height:55px;">{% endblock %}
+{% block logo %}\{% endblock %}
+{% block script %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Jenjang Tempat Mengajar', 'Jumlah'],
+          {% for data in jenjang_tempat_mengajar %}
+          ['{{ data[0] }}', {{ data[1] }}],
+          {% endfor %}
+        ]);
+        var options = {
+          title: 'Jenjang Tempat Mengajar',
+          pieStartAngle: 330,
+          pieHole: 0.4,
+          slices: {
+            0: {offset: 0.05},
+            1: {offset: 0.1},
+            2: {offset: 0.15},
+          },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Provinsi', 'Jumlah Anggota', { role: 'style' }],
+        {% for data in jumlah_per_provinsi %}
+        ['{{ data[0] }}', {{ data[1] }}, 'stroke-color: #703593; stroke-width: 1; fill-color: #C5A5CF'],
+        {% endfor %}
+      ]);
+
+      var options = {
+        title: 'Jumlah Anggota per Provinsi',
+        chartArea: {width: '60%'},
+        hAxis: {
+          title: 'Jumlah Anggota',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'Provinsi'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+
+
+    </script>
+{% endblock %}
 {% block content %}
 <section id="pemetaan-anggota">
     <h1 style="text-align:center;font-family:Montserrat;">Sebaran Anggota</h1>
-    <div class="input-container">
-        <div class="input-container-with-label" style="margin:15px;width:100%;">
-            <h4 style="font-weight:bold;">Provinsi</h4>
-            <div class="pemetaan-container">
-                {% for data in jumlah_per_provinsi %}
-                    <div class="container-data-pemetaan">
-                        <div class="review-container" style="width:50%;justify-content:flex-start;">
-                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
-                        </div>
-                        <div class="review-container" style="width:50%;justify-content:flex-end;">
-                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
-                        </div>
-
-                    </div>
-                {% endfor %}
+    <div class="container-data-pemetaan sp" style="background:black;">
+        <div class="container-data-pemetaan" style="margin-top:0;">
+            <div class="review-container" style="width:50%;justify-content:flex-start;">
+                <p style="font-weight:bold;margin-bottom:0;">Jumlah Anggota</p>
             </div>
-        </div>
-        <div class="input-container-with-label" style="margin:15px;width:100%;">
-            <h4 style="font-weight:bold;">Pendidikan Terakhir</h4>
-            <div class="pemetaan-container">
-                {% for data in pendidikan_terakhir %}
-                    <div class="container-data-pemetaan">
-                        <div class="review-container" style="width:50%;justify-content:flex-start;">
-                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
-                        </div>
-                        <div class="review-container" style="width:50%;justify-content:flex-end;">
-                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="input-container-with-label" style="margin:15px;width:100%;">
-            <h4 style="font-weight:bold;">Jenjang Tempat Mengajar</h4>
-            <div class="pemetaan-container">
-                {% for data in jenjang_tempat_mengajar %}
-                    <div class="container-data-pemetaan">
-                        <div class="review-container" style="width:50%;justify-content:flex-start;">
-                            <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
-                        </div>
-                        <div class="review-container" style="width:50%;justify-content:flex-end;">
-                            <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
+            <div class="review-container" style="width:50%;justify-content:flex-end;">
+                <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ jumlah_anggota }}</p>
             </div>
         </div>
     </div>
+
+    <div class="input-container">
+        <div class="pemetaan-container with-margin" style="height:28vw;">
+            <div id="chart_div" class="graph"></div>
+        </div>
+        <div class="pemetaan-container with-margin" style="height:28vw;">
+            <div id="piechart" class="graph"></div>
+        </div>
+    </div>
+    <div class="container-sebaran">
+        <div class="input-container ringkasan-sp">
+            <div class="input-container-with-label" style="margin:15px;width:100%;">
+                <h4 style="font-weight:bold;color:black;">Provinsi </h4>
+                <div class="pemetaan-container">
+                    {% for data in jumlah_per_provinsi %}
+                        <button class="container-data-pemetaan with-hover" onclick="window.location.href='{{ url_for('views.displayTable',
+                            provinsi=data[0] ) }}'">
+                            <span class="review-container" style="width:50%;justify-content:flex-start;">
+                                <span style="font-weight:bold;margin-bottom:0;">{{ " ".join(data[0].split()[1:]) }}</span>
+                            </span>
+                            <span class="review-container" style="width:50%;justify-content:flex-end;">
+                                <span style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</span>
+                            </span>
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="input-container-with-label" style="margin:15px;width:100%;">
+                <h4 style="font-weight:bold;color:black;">Pendidikan Terakhir</h4>
+                <div class="pemetaan-container">
+                    {% for data in pendidikan_terakhir %}
+                        <div class="container-data-pemetaan">
+                            <div class="review-container" style="width:50%;justify-content:flex-start;">
+                                <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
+                            </div>
+                            <div class="review-container" style="width:50%;justify-content:flex-end;">
+                                <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="input-container-with-label" style="margin:15px;width:100%;">
+                <h4 style="font-weight:bold;color:black;">Jenjang Tempat Mengajar</h4>
+                <div class="pemetaan-container">
+                    {% for data in jenjang_tempat_mengajar %}
+                        <div class="container-data-pemetaan">
+                            <div class="review-container" style="width:50%;justify-content:flex-start;">
+                                <p style="font-weight:bold;margin-bottom:0;">{{ data[0] }}</p>
+                            </div>
+                            <div class="review-container" style="width:50%;justify-content:flex-end;">
+                                <p style="font-weight:bold;margin-bottom:0;font-size:1.2em;">{{ data[1] }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 {% endblock %}
