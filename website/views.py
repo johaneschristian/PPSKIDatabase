@@ -39,7 +39,7 @@ def ringkasanAngggota():
     jumlah_anggota = db.session.query(User).count()
 
     for p in provinsi:
-        jumlah_per_provinsi.append((p,db.session.query(User).filter(User.provinsi.like(f'%{p}%')).count()))
+        jumlah_per_provinsi.append((p, db.session.query(User).filter(User.provinsi.like(f'%{p}%')).count()))
 
     for j in jenis_pendidikan_terakhir:
         pendidikan_terakhir.append((j, db.session.query(User).filter(User.pendidikan.like(f'{j}')).count()))
@@ -60,7 +60,7 @@ def generateID(paramProvinsi, tahunRegistrasi, nomorUrut, kabkota):
     tahunEmbed = tahunRegistrasi % 100
     nomorEmbed = nomorUrut % 10000
     return provinsiKey + str(tahunEmbed) + str(nomorEmbed).zfill(4) + \
-        kabkota
+           kabkota
 
 
 @views.route('/', methods=["GET", "POST"])
@@ -83,19 +83,45 @@ def home():
               tempat_mengajar, akun_facebook, nomor_telepon,
               provinsiInput, kabupaten_kota, esai_singkat)
         try:
-            newUser = TemporaryUser(status=status, email=email,
-                                    password=generate_password_hash(password1), nama_lengkap=nama_lengkap,
-                                    pendidikan=pendidikan, tempat_mengajar=tempat_mengajar,
-                                    akun_facebook=akun_facebook, nomor_telepon=nomor_telepon,
-                                    nama_tempat=nama_tempat,
-                                    provinsi=provinsiInput, kabupaten_kota=kabupaten_kota,
-                                    esai_singkat=esai_singkat)
+            if not (email and password1 and password2 and nama_lengkap and
+                    pendidikan and tempat_mengajar and nama_tempat
+                    and nomor_telepon and provinsiInput and kabupaten_kota and esai_singkat):
+                flash("Terdapat bagian kosong. Harap mengisi seluruh komponen isian.", category="error")
 
-            db.session.add(newUser)
-            db.session.commit()
+            elif not nomor_telepon.isnumeric():
+                flash("Nomor telepon tidak valid", category="error")
 
-            flash("Berhasil Mendaftar!", category="success")
-            return redirect(url_for("auth.telahMendaftar"))
+            elif (password1 != password2):
+                flash("Password dan konfirmasi password berbeda", category="error")
+
+            elif not 7 <= len(password1) <= 36:
+                flash("Panjang password tidak 7 sampai 12 karakter, harap mencoba lagi.", category="error")
+
+            elif not any(char.isupper() for char in password1):
+                flash("Password tidak mengandung huruf kapital, harap mencoba lagi.", category="error")
+
+            elif not any(char.islower() for char in password1):
+                flash("Password tidak mengandung huruf kecil, harap mencoba lagi.", category="error")
+
+            elif not any(char.isalpha() for char in password1):
+                flash("Password tidak mengandung karakter huruf, harap mencoba lagi.", category="error")
+
+            elif not any(char.isnumeric() for char in password1):
+                flash("Password tidak mengandung karakter angka, harap mencoba lagi.", category="error")
+
+            else:
+                newUser = TemporaryUser(status=status, email=email,
+                                        password=generate_password_hash(password1), nama_lengkap=nama_lengkap,
+                                        pendidikan=pendidikan, tempat_mengajar=tempat_mengajar,
+                                        akun_facebook=akun_facebook, nomor_telepon=nomor_telepon,
+                                        nama_tempat=nama_tempat,
+                                        provinsi=provinsiInput, kabupaten_kota=kabupaten_kota,
+                                        esai_singkat=esai_singkat)
+
+                db.session.add(newUser)
+                db.session.commit()
+
+                return redirect(url_for("auth.telahMendaftar"))
 
         except sqlalchemy.exc.IntegrityError:
             flash("Akun surel sudah terdaftar di dalam database", category="error")
@@ -146,7 +172,7 @@ def userEdit():
         kabupaten_kota = request.form.get("kabkota")
         esai_singkat = request.form.get("esai")
 
-        if not (pendidikan and tempat_mengajar and nama_tempat and akun_facebook \
+        if not (pendidikan and tempat_mengajar and nama_tempat
                 and nomor_telepon and provinsiParam and kabupaten_kota):
             flash("Terdapat bagian kosong. Harap mengisi seluruh komponen isian.", category="error")
 
@@ -220,8 +246,9 @@ def displayTable():
             page = 1
 
         matching_array = db.session.query(User).filter(User.nama_lengkap.like(f'%{keyword}%'),
-                        User.provinsi.like(f'%{provinsifilter}%'),
-                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page, per_page=20)
+                                                       User.provinsi.like(f'%{provinsifilter}%'),
+                                                       User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page,
+                                                                                                             per_page=20)
 
         print(provinsifilter, kotafilter)
 
@@ -391,7 +418,6 @@ def gantiPassword():
         oldpassword = request.form.get("oldpassword")
         newpassword = request.form.get("newpassword")
         confirmedpassword = request.form.get("confirmedpassword")
-        condition = True
 
         # Check oldpassword
         if not (oldpassword and newpassword and confirmedpassword):
@@ -403,13 +429,25 @@ def gantiPassword():
         elif newpassword != confirmedpassword:
             flash("Konfirmasi password tidak sesuai", category="error")
 
-        elif not condition:
-            pass  # Check for condition
+        elif not 7 <= len(newpassword) <= 36:
+            flash("Panjang password tidak 7 sampai 12 karakter, harap mencoba lagi.", category="error")
+
+        elif not any(char.isupper() for char in newpassword):
+            flash("Password tidak mengandung huruf kapital, harap mencoba lagi.", category="error")
+
+        elif not any(char.islower() for char in newpassword):
+            flash("Password tidak mengandung huruf kecil, harap mencoba lagi.", category="error")
+
+        elif not any(char.isalpha() for char in newpassword):
+            flash("Password tidak mengandung karakter huruf, harap mencoba lagi.", category="error")
+
+        elif not any(char.isnumeric() for char in newpassword):
+            flash("Password tidak mengandung karakter angka, harap mencoba lagi.", category="error")
 
         else:
             current_user.password = generate_password_hash(newpassword)
             db.session.commit()
-            flash("Password berhasil diganti!")
+            flash("Password berhasil diganti!", category="success")
             return redirect(url_for("views.userDashboard"))
 
     return render_template("ganti-password.html", paramUser=current_user, accessing_user=current_user)
@@ -438,7 +476,7 @@ def adminEditUser(id):
         kabupaten_kota = request.form.get("kabkota")
         esai_singkat = request.form.get("esai")
 
-        if not (pendidikan and tempat_mengajar and nama_tempat and akun_facebook
+        if not (pendidikan and tempat_mengajar and nama_tempat
                 and nomor_telepon and provinsiParam and kabupaten_kota):
             flash("Terdapat bagian kosong. Harap mengisi seluruh komponen isian.", category="error")
 

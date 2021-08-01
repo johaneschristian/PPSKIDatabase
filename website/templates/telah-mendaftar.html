@@ -3,6 +3,29 @@
 {% block title %}Berhasil Mendaftar{% endblock %}
 {% block source %}<img src="\static\ppski-logo.png" alt="" style="width:55px;height:55px;">{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <br/>
+            <br/>
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% else %}
+              <div class="alert alert-success alter-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
 <div class="container-telah-mendaftar">
     <p align="center">
         Terima kasih telah mendaftar ke laman PPSKI Pusat.
