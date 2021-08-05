@@ -160,7 +160,7 @@
             />
         </div>
         <div class="input-container">
-            <select name="provinsi" id="provinsi" class="custom-input">
+            <select name="provinsi" id="provinsi" class="custom-input" onchange="adjustKotaNonAdmin()">
                 <option selected="selected" disabled>Provinsi</option>
                 {% for province in provinsi %}
                 <option value="{{ province }}">{{ province[province.index(" ")+1:] }}</option>

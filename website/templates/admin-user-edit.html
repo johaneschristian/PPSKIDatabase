@@ -136,7 +136,7 @@
     <div class="input-container">
         <div class="input-container-with-label">
             <label for="provinsi">Provinsi</label>
-            <select name="provinsi" id="provinsi" class="input-edit input-edit-editable">
+            <select name="provinsi" id="provinsi" class="input-edit input-edit-editable" onchange="adjustKotaNonAdmin()">
                 <option selected="selected" value="{{ paramUser.provinsi }}">{{ " ".join(paramUser.provinsi.split()[1:]) }}</option>
                 {% for province in provinsi %}
                 <option value="{{ province }}">{{ " ".join(province.split()[1:]) }}</option>

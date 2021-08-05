@@ -29,7 +29,18 @@ provinsi = \
      "NT Nusa Tenggara Timur",
      "KB Kalimantan Barat",
      "KT Kalimantan Tengah",
-     "KS Kalimantan Selatan"]
+     "KS Kalimantan Selatan",
+     "KI Kalimantan Timur",
+     "SA Sulawesi Utara",
+     "ST Sulawesi Tengah",
+     "KI Kalimantan Timur",
+     "SG Sulawesi Tenggara",
+     "GO Gorontalo",
+     "SR Sulawesi Barat",
+     "MA Maluku",
+     "MU Maluku Utara",
+     "PA Papua",
+     "PB Papua Barat"]
 
 kumpulankabkota = \
     ["TTN Kabupaten Aceh Selatan",

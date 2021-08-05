@@ -13,18 +13,20 @@
             name="keyword" value="{{ previous_nama }}" style="margin-right:0;"/>
             <button class="table-search-button" style="color:white;">CARI</button>
         </div>
+        <div class="result"></div>
         <div class="input-container">
-            <select name="provinsifilter" id="provinsifilter" class="input-edit input-edit-editable table-special">
+            <select name="provinsifilter" id="provinsifilter" class="selector input-edit input-edit-editable table-special"
+            onchange="adjustKota()">
                 <option value="">Provinsi</option>
                 {% if previous_provinsi %}
-                    <option value="{{ previous_provinsi }}" selected>{{ " ".join(previous_provinsi.split()[1:]) }}</option>
+                    <option value="{{ previous_provinsi }}" id="selectedkota" selected>{{ " ".join(previous_provinsi.split()[1:]) }}</option>
                 {% endif %}
                 {% for province in provinsi %}
                 <option value="{{ province }}">{{ " ".join(province.split()[1:]) }}</option>
                 {% endfor %}
             </select>
             <select name="kotafilter" id="kotafilter" class="input-edit input-edit-editable table-special">
-                <option value="">Kabupaten Kota</option>
+                <option value="">Kabupaten/Kota</option>
                 {% if previous_kota %}
                     <option value="{{ previous_kota }}" selected>{{ " ".join(previous_kota.split()[1:]) }}</option>
                 {% endif %}
@@ -83,8 +85,5 @@
         </div>
         {% endfor %}
     </div>
-
-
-
 </section>
 {% endblock %}
