@@ -716,7 +716,7 @@ function adjustKota() {
     } else if (provinsi == "GO Gorontalo") {
         items = GORONTALO;
 
-    } else if (provinis == "SR Sulawesi Barat") {
+    } else if (provinsi == "SR Sulawesi Barat") {
         items = SULAWESI_BARAT;
 
     } else if (provinsi == "MA Maluku") {
@@ -1417,7 +1417,7 @@ function adjustKotaNonAdmin() {
     } else if (provinsi == "GO Gorontalo") {
         items = GORONTALO;
 
-    } else if (provinis == "SR Sulawesi Barat") {
+    } else if (provinsi == "SR Sulawesi Barat") {
         items = SULAWESI_BARAT;
 
     } else if (provinsi == "MA Maluku") {
@@ -1436,9 +1436,11 @@ function adjustKotaNonAdmin() {
         items = [];
     }
 
-    var str = "<option value=\"\" selected>Kabupaten/Kota</option>"
+    var str = "";
+
     for (var item of items) {
-        str += "<option value=" + "\"" + item + "\"" + ">" + item.split(" ").slice(1,).join(" ") + "</option>"
+        str += "<option value=" + "\"" + item + "\"" + ">" + item.split(" ").slice(1,).join(" ") + "</option>";
     }
+
     document.getElementById("kabkota").innerHTML = str;
 }
