@@ -47,7 +47,7 @@
 
         </form>
     </div>
-    <div class="container-fluid">
+    <div class="grid-container">
     {% for matching in matching_array %}
     <button class="display-info-box" onclick="window.location.href='/id-cek-data/{{ matching.id }}'">
         <span>{{ matching.nama_lengkap.upper()[0:15] }}</span><br/>

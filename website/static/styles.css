@@ -1,3 +1,10 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 18vw);
+    text-align: center;
+    padding: 25px;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -618,13 +625,15 @@ td {
 }
 
 .display-info-box {
-    width: 91.5vw;  /* Previously 300px if block implementation is required 85vw*/
-    height: auto;  /* Previously 200px */
+    /*width: 91.5vw;*/
+    /* Previously 300px if block implementation is required 85vw*/
+    height: 10vw;  /* Previously 200px */
+    grid-column: span 1;
     background: #2E68FF;
     border-radius: 20px;
     /*margin: auto;*/
     /*margin-left: 1vw;*/
-    margin-top: 18px;
+    margin: 25px;
     word-wrap: break-word;
     overflow: hidden;
     padding: 10px 5px 15px 5px;
@@ -1310,6 +1319,14 @@ div .grey {
 
 /* Ipad Pro */
 @media screen and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 30vw);
+    }
+
+    .display-info-box {
+        height: 20vw;
+    }
+
     .login-button-kembali {
         top:450px;
     }
@@ -1362,12 +1379,6 @@ div .grey {
     }
 
 
-    .display-info-box {
-        width: 90vw;
-        height: 100px;
-        margin-left: 0;
-    }
-
     .red-search-button {
         width: 12vw;
         font-size: 3vw;
@@ -1375,6 +1386,12 @@ div .grey {
 }
 /* Motorolla and surface duo */
 @media screen and (max-width: 540px) {
+
+    .grid-container {
+        grid-template-columns: repeat(1, 100vw);
+        padding: 0;
+
+    }
     .container-telah-mendaftar {
         width: 70vw;
         margin-left: 15vw;
@@ -1410,7 +1427,7 @@ div .grey {
     }
 
     .display-info-box {
-        width: 87vw;
+        grid-column: span 1;
         height: 110px;
         margin-left: 0;
         font-size: 20px;
