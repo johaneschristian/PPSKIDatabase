@@ -1036,10 +1036,10 @@ div .grey {
 .twoContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    /*justify-content: space-evenly;*/
     align-items: center;
     text-align: left;
-    margin: 7vh;
+    /*margin: 7vh;*/
 }
 
 .input-container {
