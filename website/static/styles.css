@@ -1036,7 +1036,6 @@ div .grey {
 .twoContainer {
     display: flex;
     flex-direction: row;
-    /*justify-content: space-evenly;*/
     align-items: center;
     text-align: left;
     margin-bottom: 7vh;
