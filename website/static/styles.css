@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 18vw);
@@ -398,7 +401,7 @@ td {
 }
 
 .website-heading {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
 }
 
@@ -413,7 +416,7 @@ td {
     border-radius: 10px;
     border: none;
 
-    font-family:Montserrat;
+    font-family: 'Poppins', sans-serif;
     font-style:normal;
     font-size:18px;
     color:white;
@@ -430,7 +433,7 @@ td {
     border-radius: 10px;
     border: none;
 
-    font-family:Montserrat;
+    font-family: 'Poppins', sans-serif;
     font-style:normal;
     font-size: 18px;
     color: white;
@@ -441,7 +444,7 @@ td {
 .masuk-text {
     /* Masuk */
 
-    font-family: Montserrat;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
@@ -1120,7 +1123,7 @@ div .grey {
     text-align: left;
     color: #fff;
     
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 2.65rem;
 
 }
@@ -1129,7 +1132,7 @@ div .grey {
     text-align: left;
     color: #fff;
     
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 2.25rem;
 }
 
