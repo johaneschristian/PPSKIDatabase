@@ -1,6 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
+.register-container h3 {
+    font-family:'Poppins', sans-serif;
+    color:white;
+    font-size: 36px;
+}
+
+label#esai {
+    font-family:'Poppins', sans-serif;
+    color:white;
+    font-size: 36px;
+}
+
+.input-container h1 {
+    font-family:'Poppins', sans-serif;
+    color:white;
+}
+
+#login h3 {
+    font-family: 'Poppins', sans-serif;
+    color:#2E68FF;
+    margin-top:20vh;
+    color:white;
+    font-size:36px;
+}
+
+.container-cek-data h1 {
+    font-family: 'Poppins', sans-serif;
+    color:#2E68FF;
+}
 .context h1 {
     font-size: 2rem !important;
 }
