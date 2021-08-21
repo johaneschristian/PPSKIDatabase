@@ -14,7 +14,7 @@ calon_diterima = set()
 provinsi = provinsi
 
 
-@views.route('/ringkasan-anggota', methods=["GET", "POST"])
+@views.route('/keanggotaan/ringkasan-anggota', methods=["GET", "POST"])
 def ringkasanAngggota():
     jenis_pendidikan_terakhir = ['S1 Pendidikan Kimia',
                                  'S1 Kimia Sains',
@@ -63,7 +63,7 @@ def generateID(paramProvinsi, tahunRegistrasi, nomorUrut, kabkota):
            kabkota
 
 
-@views.route('/', methods=["GET", "POST"])
+@views.route('/keanggotaan/', methods=["GET", "POST"])
 def home():
     if request.method == "POST":
         status = "temporer"
@@ -130,7 +130,7 @@ def home():
                            kumpulankabkota=kumpulankabkota)
 
 
-@views.route('/cek-data-anggota', methods=["GET", "POST"])
+@views.route('/keanggotaan/cek-data-anggota', methods=["GET", "POST"])
 def cekAnggota():
     matching_array = []
     cari_nama = ""
@@ -144,7 +144,7 @@ def cekAnggota():
                            cari_nama=cari_nama)
 
 
-@views.route('/dashboard-navigator')
+@views.route('/keanggotaan/dashboard-navigator')
 @login_required
 def dashboardNavigator():
     if current_user.status == "admin":
@@ -153,13 +153,13 @@ def dashboardNavigator():
         return redirect(url_for("views.userDashboard"))
 
 
-@views.route('/user-dashboard', methods=["GET", "POST"])
+@views.route('/keanggotaan/user-dashboard', methods=["GET", "POST"])
 @login_required
 def userDashboard():
     return render_template("user-dashboard.html", accessing_user=current_user)
 
 
-@views.route('/edit-profil', methods=["GET", "POST"])
+@views.route('/keanggotaan/edit-profil', methods=["GET", "POST"])
 @login_required
 def userEdit():
     if request.method == "POST":
@@ -193,7 +193,7 @@ def userEdit():
                            accessing_user=current_user)
 
 
-@views.route('/admin-dashboard', methods=["GET", "POST"])
+@views.route('/keanggotaan/admin-dashboard', methods=["GET", "POST"])
 @login_required
 def adminDashboard():
     if current_user.status != "admin":
@@ -205,7 +205,7 @@ def adminDashboard():
     return render_template("admin-dashboard.html", accessing_user=current_user)
 
 
-@views.route('/table-display', methods=["GET", "POST"])
+@views.route('/keanggotaan/table-display', methods=["GET", "POST"])
 @login_required
 def displayTable():
     if current_user.status != "admin":
@@ -264,7 +264,7 @@ def displayTable():
                                previous_provinsi=provinsifilter, previous_kota=kotafilter)
 
 
-@views.route('/registration-queue', methods=["GET", "POST"])
+@views.route('/keanggotaan/registration-queue', methods=["GET", "POST"])
 @login_required
 def registrationQueue():
     if current_user.status != "admin":
@@ -277,7 +277,7 @@ def registrationQueue():
     return render_template("registration-queue.html", accessing_user=current_user)
 
 
-@views.route('/review-calon/<int:id>', methods=["GET", "POST"])
+@views.route('/keanggotaan/review-calon/<int:id>', methods=["GET", "POST"])
 @login_required
 def reviewCalon(id):
     if current_user.status != "admin":
@@ -287,7 +287,7 @@ def reviewCalon(id):
     return render_template("review-calon.html", paramUser=paramUser, accessing_user=current_user)
 
 
-@views.route('/delete-user/<int:id>', methods=["GET"])
+@views.route('/keanggotaan/delete-user/<int:id>', methods=["GET"])
 @login_required
 def deleteUser(id):
     if current_user.status != 'admin':
@@ -304,7 +304,7 @@ def deleteUser(id):
     return redirect(url_for('views.displayTable'))
 
 
-@views.route('/tolak-calon/<int:id_number>', methods=["GET"])
+@views.route('/keanggotaan/tolak-calon/<int:id_number>', methods=["GET"])
 @login_required
 def tolakCalon(id_number):
     if current_user.status != "admin":
@@ -318,7 +318,7 @@ def tolakCalon(id_number):
     return redirect(url_for("views.registrationQueue"))
 
 
-@views.route('/terima-calon/<int:id_number>', methods=["GET"])
+@views.route('/keanggotaan/terima-calon/<int:id_number>', methods=["GET"])
 @login_required
 def terimaAnggota(id_number):
     if current_user.status != "admin":
@@ -382,7 +382,7 @@ def kirimPesan(email, isAccepted):
     print("Email sent!")
 
 
-@views.route('/temporary-redirect', methods=["GET"])
+@views.route('/keanggotaan/temporary-redirect', methods=["GET"])
 def temp():
     print("called")
     return redirect(url_for("views.registrationQueue"))
@@ -411,7 +411,7 @@ def bundleSend():
     return redirect(url_for("views.adminDashboard"))
 
 
-@views.route('/ganti-password', methods=["GET", "POST"])
+@views.route('/keanggotaan/ganti-password', methods=["GET", "POST"])
 @login_required
 def gantiPassword():
     if request.method == "POST":
@@ -453,7 +453,7 @@ def gantiPassword():
     return render_template("ganti-password.html", paramUser=current_user, accessing_user=current_user)
 
 
-@views.route('/admin-edit-user/<int:id>', methods=["GET", "POST"])
+@views.route('/keanggotaan/admin-edit-user/<int:id>', methods=["GET", "POST"])
 @login_required
 def adminEditUser(id):
     if current_user.status != "admin":
@@ -498,7 +498,7 @@ def adminEditUser(id):
                            accessing_user=current_user)
 
 
-@views.route('/id-cek-data/<int:id>')
+@views.route('/keanggotaan/id-cek-data/<int:id>')
 def id_cek_data(id):
     user = User.query.get(id)
     return render_template("id-cek-data.html", user=user, accessing_user=current_user)

@@ -544,7 +544,7 @@ kumpulankabkota = \
 ]
 
 
-@auth.route('/reset-password/<int:id>', methods=["GET"])
+@auth.route('/keanggotaan/reset-password/<int:id>', methods=["GET"])
 def resetPassword(id):
     if request.method == "GET":
         if current_user.status != "admin":
@@ -556,7 +556,7 @@ def resetPassword(id):
             print(f"ppski2021{id}")
             return redirect(url_for('views.displayTable'))
 
-@auth.route("/masuk", methods=["GET", "POST"])
+@auth.route("/keanggotaan/masuk", methods=["GET", "POST"])
 def masuk():
     if request.method == "POST":
         email = request.form.get('email')
@@ -579,7 +579,7 @@ def masuk():
 
     return render_template("masuk.html", accessing_user=current_user)
 
-@auth.route('/migrate-user')
+@auth.route('/keanggotaan/migrate-user')
 def migrateUser():
     with open('/Users/johanestarigan/Downloads/tb_anggota_2021-Jul-12_0928/tb_anggota_2021-Jul-12_0928.csv') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -607,7 +607,7 @@ def migrateUser():
 
     return redirect(url_for("views.home"))
 
-@auth.route('/make-admin/<int:id>')
+@auth.route('/keanggotaan/make-admin/<int:id>')
 @login_required
 def makeAdmin(id):
     if current_user.id != 1:
@@ -621,7 +621,7 @@ def makeAdmin(id):
     return redirect(url_for("views.displayTable"))
 
 
-@auth.route('/revoke-admin/<int:id>')
+@auth.route('/keanggotaan/revoke-admin/<int:id>')
 @login_required
 def revokeAdmin(id):
     if current_user.id != 1:
@@ -634,7 +634,7 @@ def revokeAdmin(id):
 
     return redirect(url_for("views.displayTable"))
 
-@auth.route('/generate-admin')
+@auth.route('/keanggotaan/generate-admin')
 def generateAdmin():
     admin = User(status="admin", email="admin@admin.com",password=generate_password_hash("admin"))
     db.session.add(admin)
@@ -643,7 +643,7 @@ def generateAdmin():
     return redirect(url_for("views.home"))
 
 
-@auth.route("/daftar-anggota", methods=["GET", "POST"])
+@auth.route("/keanggotaan/daftar-anggota", methods=["GET", "POST"])
 def daftarAnggota():
     if request.method == "POST":
         status = "temporer"
@@ -684,12 +684,12 @@ def daftarAnggota():
                            accessing_user=current_user)
 
 
-@auth.route('/telah-mendaftar', methods=["GET"])
+@auth.route('/keanggotaan/telah-mendaftar', methods=["GET"])
 def telahMendaftar():
     return render_template("telah-mendaftar.html", accessing_user=current_user)
 
 
-@auth.route('/keluar', methods=["GET"])
+@auth.route('/keanggotaan/keluar', methods=["GET"])
 @login_required
 def keluar():
     logout_user()
