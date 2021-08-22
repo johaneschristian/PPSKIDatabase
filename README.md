@@ -33,4 +33,4 @@ that allows to perform the following actions, but not limited to
 <p>The overall design of this application was created by Immanuel Sitepu (email: stpimm@muels.id)</p>
 <p>Here is the link to his personal github page <a href="https://github.com/stpimm">stpimm</a>.</p>
 <br></br>
-<p>ps. It is important to note that this is my first web-development application. I admit that various bad practices are implemented in the program due to the limited knowledge of the author at the time of when the application is written.</p>
+<p>p.s. It is important to note that this is my first web-development application. I admit that various bad practices are implemented in the program due to the limited knowledge of the author at the time of when the application is written.</p>
