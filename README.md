@@ -31,3 +31,4 @@ that allows to perform the following actions, but not limited to
 
 <h2>Acknowledgements</h2>
 <p>The overall design of this application was created by Immanuel Sitepu (email: stpimm@muels.id)</p>
+<p>Here is the link to his personal github page <a href="https://github.com/stpimm">stpimm</a>.</p>
