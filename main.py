@@ -1,6 +1,8 @@
 from website import create_app
 from flask import redirect, url_for
+import os
 
+port = int(os.environ.get('PORT', 5000))
 app = create_app()
 
 
@@ -11,4 +13,4 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=False, port=port)

@@ -1473,6 +1473,8 @@ div .grey {
         height: 110px;
         margin-left: 0;
         font-size: 20px;
+        margin-top: 10px !important;
+        margin-right: 25px !important;
     }
 
     section#user-dashboard {
