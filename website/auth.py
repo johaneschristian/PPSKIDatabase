@@ -634,13 +634,13 @@ def revokeAdmin(id):
 
     return redirect(url_for("views.displayTable"))
 
-@auth.route('/generate-admin')
-def generateAdmin():
-    admin = User(status="admin", email="admin@admin.com",password=generate_password_hash("admin"))
-    db.session.add(admin)
-    db.session.commit()
-    flash("Admin user-created")
-    return redirect(url_for("views.home"))
+# @auth.route('/generate-admin')
+# def generateAdmin():
+#     admin = User(status="admin", email="admin@admin.com",password=generate_password_hash("admin"))
+#     db.session.add(admin)
+#     db.session.commit()
+#     flash("Admin user-created")
+#     return redirect(url_for("views.home"))
 
 
 @auth.route("/daftar-anggota", methods=["GET", "POST"])
