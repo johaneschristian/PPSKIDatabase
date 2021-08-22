@@ -32,5 +32,7 @@ that allows to perform the following actions, but not limited to
 <h2>Acknowledgements</h2>
 <p>The overall design of this application was created by Immanuel Sitepu (email: stpimm@muels.id)</p>
 <p>Here is the link to his personal github page <a href="https://github.com/stpimm">stpimm</a>.</p>
-<br></br>
+
+<h2>Project Link</h2>
+<p>The project can be accessed through <a href="https://keanggotaan.ppski.id">keanggotaan.ppski.id</a></p>
 <p>p.s. It is important to note that this is my first web-development application. I admit that various bad practices are implemented in the program due to the limited knowledge of the author at the time of when the application is written.</p>
