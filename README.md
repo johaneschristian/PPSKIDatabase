@@ -35,4 +35,4 @@ that allows to perform the following actions, but not limited to
 
 <h2>Project Link</h2>
 <p>The project can be accessed through <a href="https://keanggotaan.ppski.id">keanggotaan.ppski.id</a></p>
-<p>p.s. It is important to note that this is my first web-development application. I admit that various bad practices are implemented in the program due to the limited knowledge of the author at the time of when the application is written.</p>
+<p>p.s. It is important to note that this is my first web-development application. The author admits that various bad practices are implemented in the program due to the limited knowledge of the author at the time of when the application is written.</p>
