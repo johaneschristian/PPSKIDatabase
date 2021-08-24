@@ -1,5 +1,5 @@
 <h1>PPSKI Database</h1>
-PPSKI Database is a database application designed to meet the purpose of the largest Indonesian Chemical-Science Educator
+PPSKI Database is a database application designed to meet the needs of the largest Indonesian Chemical-Science Educator
 Association, also known as Perkumpulan Pendidik Sains Kimia Indonesia.
 <br></br>
 
