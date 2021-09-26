@@ -665,7 +665,7 @@ function adjustKota() {
     } else if (provinsi == "KR Kepulauan Riau") {
         items = KEPULAUAN_RIAU;
 
-    } else if (provinsi == "JK D.K.I. Jakarta") {
+    } else if (provinsi == "JK D.K.I. JAKARTA") {
         items = DKI_JAKARTA;
 
     } else if (provinsi == "JB Jawa Barat") {
@@ -674,7 +674,7 @@ function adjustKota() {
     } else if (provinsi == "JT Jawa Tengah") {
         items = JAWA_TENGAH;
 
-    } else if (provinsi == "YO DI Yogyakarta") {
+    } else if (provinsi == "YO D.I. YOGYAKARTA") {
         items = DI_YOGYAKARTA;
 
     } else if (provinsi == "JI Jawa Timur") {
@@ -1366,7 +1366,7 @@ function adjustKotaNonAdmin() {
     } else if (provinsi == "KR Kepulauan Riau") {
         items = KEPULAUAN_RIAU;
 
-    } else if (provinsi == "JK D.K.I. Jakarta") {
+    } else if (provinsi == "JK D.K.I. JAKARTA") {
         items = DKI_JAKARTA;
 
     } else if (provinsi == "JB Jawa Barat") {
@@ -1375,7 +1375,7 @@ function adjustKotaNonAdmin() {
     } else if (provinsi == "JT Jawa Tengah") {
         items = JAWA_TENGAH;
 
-    } else if (provinsi == "YO DI Yogyakarta") {
+    } else if (provinsi == "YO D.I. YOGYAKARTA") {
         items = DI_YOGYAKARTA;
 
     } else if (provinsi == "JI Jawa Timur") {
