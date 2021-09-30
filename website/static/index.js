@@ -634,6 +634,33 @@ function adjustKota() {
         "AFT Kabupaten Maybrat",
         "SON Kota Sorong"
     ]
+
+    var SULAWESI_SELATAN = [
+        "BAN Kabupaten Bantaeng",
+        "BAR Kabupaten Barru",
+        "WTP Kabupaten Bone",
+        "BLK Kabupaten Bulukumba",
+        "ENR Kabupaten Enrekang",
+        "SGM Kabupaten Gowa",
+        "JNP Kabupaten Jeneponto",
+        "BEN Kabupaten Selayar (Kepulauan Selayar)",
+        "PLP Kabupaten Luwu",
+        "MLL Kabupaten Luwu Timur",
+        "MSB Kabupaten Luwu Utara",
+        "MRS Kabupaten Maros",
+        "PKJ Kabupaten Pangkajene Kepulauan",
+        "PIN Kabupaten Pinrang",
+        "SDR Kabupaten Sidenreng Rappang (Sidrap)",
+        "SNJ Kabupaten Sinjai",
+        "WNS Kabupaten Soppeng",
+        "TKA Kabupaten Takalar",
+        "MAK Kabupaten Tana Toraja",
+        "RTP Kabupaten Toraja Utara",
+        "SKG Kabupaten Wajo",
+        "MKS Kota Makassar",
+        "PLP Kota Palopo",
+        "PRE Kota Parepare"
+    ];
     var items;
     if (provinsi == "AC NANGRO ACEH DARUSSALAM") {
         items = NANGRO_ACEH_DARUSSALAM;
@@ -731,7 +758,11 @@ function adjustKota() {
     } else if (provinsi == "PB Papua Barat") {
         items = PAPUA_BARAT;
 
-    } else {
+    } else if (provinsi == "SN Sulawesi Selatan") {
+        items = SULAWESI_SELATAN;
+    }
+
+    else {
         items = [];
     }
 
@@ -1334,7 +1365,36 @@ function adjustKotaNonAdmin() {
         "FEF Kabupaten Tambrauw",
         "AFT Kabupaten Maybrat",
         "SON Kota Sorong"
-    ]
+    ];
+
+    var SULAWESI_SELATAN = [
+        "BAN Kabupaten Bantaeng",
+        "BAR Kabupaten Barru",
+        "WTP Kabupaten Bone",
+        "BLK Kabupaten Bulukumba",
+        "ENR Kabupaten Enrekang",
+        "SGM Kabupaten Gowa",
+        "JNP Kabupaten Jeneponto",
+        "BEN Kabupaten Selayar (Kepulauan Selayar)",
+        "PLP Kabupaten Luwu",
+        "MLL Kabupaten Luwu Timur",
+        "MSB Kabupaten Luwu Utara",
+        "MRS Kabupaten Maros",
+        "PKJ Kabupaten Pangkajene Kepulauan",
+        "PIN Kabupaten Pinrang",
+        "SDR Kabupaten Sidenreng Rappang (Sidrap)",
+        "SNJ Kabupaten Sinjai",
+        "WNS Kabupaten Soppeng",
+        "TKA Kabupaten Takalar",
+        "MAK Kabupaten Tana Toraja",
+        "RTP Kabupaten Toraja Utara",
+        "SKG Kabupaten Wajo",
+        "MKS Kota Makassar",
+        "PLP Kota Palopo",
+        "PRE Kota Parepare"
+    ];
+
+
     var items;
     if (provinsi == "AC NANGRO ACEH DARUSSALAM") {
         items = NANGRO_ACEH_DARUSSALAM;
@@ -1431,6 +1491,9 @@ function adjustKotaNonAdmin() {
 
     } else if (provinsi == "PB Papua Barat") {
         items = PAPUA_BARAT;
+
+    } else if (provinsi == "SN Sulawesi Selatan") {
+        items = SULAWESI_SELATAN;
 
     } else {
         items = [];

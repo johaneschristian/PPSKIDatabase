@@ -2,7 +2,7 @@ from website import create_app
 from flask import redirect, url_for
 import os
 
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT', 4040))
 app = create_app()
 
 
