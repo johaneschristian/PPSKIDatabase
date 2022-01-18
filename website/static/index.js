@@ -633,8 +633,12 @@ var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
 
 
 window.onload = function() {
+    var last_kota_filter = document.getElementById('kotafilter').value
+
     if(window.location.href.match('table-display')) {
         adjustKota();
+
+        document.getElementById('kotafilter').value = last_kota_filter;
     }
 };
 
