@@ -1,3 +1,4 @@
 # Project exclude paths
 /venv/
 /website/database.db
+/website/__pycache__/
