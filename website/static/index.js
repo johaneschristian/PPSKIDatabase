@@ -1,50 +1,4 @@
-function editSelected(userID) {
-    alert("Editing " + userID)
-    fetch("/admin-select-user", {
-        method: "POST",
-        body: JSON.stringify({ userID: userID })
-
-    }).then((_res) => {
-        window.location.href = "/admin-edit-user"
-    })
-}
-
-function reviewSelected(userID) {
-    alert("Reviewing " + userID)
-    fetch("/select-user", {
-        method: "POST",
-        body: JSON.stringify({ userID: userID })
-    }).then((_res) => {
-        window.location.href = "/review-calon"
-    });
-}
-
-function tolakCalon(userID) {
-  alert("Menolak " + userID)
-
-  fetch("/tolak-calon", {
-    method: "POST",
-    body: JSON.stringify({ userID: userID })
-  }).then((_res) => {
-    window.location.href = '/registration-queue'
-  });
-}
-
-function terimaCalon(userID) {
-    alert("Menerima " + userID)
-
-    fetch("/terima-calon", {
-    method: "POST",
-    body: JSON.stringify({ userID: userID })
-    }).then((_res) => {
-    alert("Auto Fetch")
-    window.location.href = '/registration-queue'
-    });
-}
-
-function adjustKota() {
-    var provinsi = document.getElementById("provinsifilter").value;
-    var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
+var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
     "KTN Kabupaten Aceh Tenggara",
     "LGS Kabupaten Aceh Timur",
     "TKN Kabupaten Aceh Tengah",
@@ -666,122 +620,52 @@ function adjustKota() {
         "PLP Kota Palopo",
         "PRE Kota Parepare"
     ];
-    var items;
-    if (provinsi == "AC NANGRO ACEH DARUSSALAM") {
-        items = NANGRO_ACEH_DARUSSALAM;
 
-    } else if (provinsi == "SU Sumatera Utara") {
-        items = SUMATERA_UTARA;
+function editSelected(userID) {
+    alert("Editing " + userID)
+    fetch("/admin-select-user", {
+        method: "POST",
+        body: JSON.stringify({ userID: userID })
 
-    } else if (provinsi == "SB Sumatera Barat") {
-        items = SUMATERA_BARAT;
-
-    } else if (provinsi == "RI Riau") {
-        items = RIAU;
-
-    } else if (provinsi == "JA Jambi") {
-        items = JAMBI;
-
-    } else if (provinsi == "SS Sumatera Selatan") {
-        items = SUMATERA_SELATAN;
-
-    } else if (provinsi == "BE Bengkulu") {
-        items = BENGKULU;
-
-    } else if (provinsi == "LA Lampung") {
-        items = LAMPUNG;
-
-    } else if (provinsi == "BB Kepulauan Bangka Belitung") {
-        items = KEPUALAN_BANGKA_BELITUNG;
-
-    } else if (provinsi == "KR Kepulauan Riau") {
-        items = KEPULAUAN_RIAU;
-
-    } else if (provinsi == "JK D.K.I. JAKARTA") {
-        items = DKI_JAKARTA;
-
-    } else if (provinsi == "JB Jawa Barat") {
-        items = JAWA_BARAT;
-
-    } else if (provinsi == "JT Jawa Tengah") {
-        items = JAWA_TENGAH;
-
-    } else if (provinsi == "YO D.I. YOGYAKARTA") {
-        items = DI_YOGYAKARTA;
-
-    } else if (provinsi == "JI Jawa Timur") {
-        items = JAWA_TIMUR;
-
-    } else if (provinsi == "BT Banten") {
-        items = BANTEN;
-
-    } else if (provinsi == "BA Bali") {
-        items = BALI;
-
-    } else if (provinsi == "NB Nusa Tenggara Barat") {
-        items = NUSA_TENGGARA_BARAT;
-
-    } else if (provinsi == "NT Nusa Tenggara Timur") {
-        items = NUSA_TENGGARA_TIMUR;
-
-    } else if (provinsi == "KB Kalimantan Barat") {
-        items = KALIMANTAN_BARAT;
-
-    } else if (provinsi == "KT Kalimantan Tengah") {
-        items = KALIMANTAN_TENGAH;
-
-    } else if (provinsi == "KS Kalimantan Selatan") {
-        items = KALIMANTAN_SELATAN;
-
-    } else if (provinsi == "KI Kalimantan Timur") {
-        items = KALIMANTAN_TIMUR;
-
-    } else if (provinsi == "SA Sulawesi Utara") {
-        items = SULAWESI_UTARA;
-
-    } else if (provinsi == "ST Sulawesi Tengah") {
-        items = SULAWESI_TENGAH;
-
-    } else if (provinsi == "SG Sulawesi Tenggara") {
-        items = SULAWESI_TENGGARA;
-
-    } else if (provinsi == "GO Gorontalo") {
-        items = GORONTALO;
-
-    } else if (provinsi == "SR Sulawesi Barat") {
-        items = SULAWESI_BARAT;
-
-    } else if (provinsi == "MA Maluku") {
-        items = MALUKU;
-
-    } else if (provinsi == "MU Maluku Utara") {
-        items = MALUKU_UTARA;
-
-    } else if (provinsi == "PA Papua") {
-        items = PAPUA;
-
-    } else if (provinsi == "PB Papua Barat") {
-        items = PAPUA_BARAT;
-
-    } else if (provinsi == "SN Sulawesi Selatan") {
-        items = SULAWESI_SELATAN;
-    }
-
-    else {
-        items = [];
-    }
-
-    var str = "<option value=\"\" selected>Kabupaten/Kota</option>"
-    for (var item of items) {
-        str += "<option value=" + "\"" + item + "\"" + ">" + item.split(" ").slice(1,).join(" ") + "</option>"
-    }
-    document.getElementById("kotafilter").innerHTML = str;
+    }).then((_res) => {
+        window.location.href = "/admin-edit-user"
+    })
 }
 
+function reviewSelected(userID) {
+    alert("Reviewing " + userID)
+    fetch("/select-user", {
+        method: "POST",
+        body: JSON.stringify({ userID: userID })
+    }).then((_res) => {
+        window.location.href = "/review-calon"
+    });
+}
 
-function adjustKotaNonAdmin() {
-    var provinsi = document.getElementById("provinsi").value;
-    var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
+function tolakCalon(userID) {
+  alert("Menolak " + userID)
+
+  fetch("/tolak-calon", {
+    method: "POST",
+    body: JSON.stringify({ userID: userID })
+  }).then((_res) => {
+    window.location.href = '/registration-queue'
+  });
+}
+
+function terimaCalon(userID) {
+    alert("Menerima " + userID)
+
+    fetch("/terima-calon", {
+    method: "POST",
+    body: JSON.stringify({ userID: userID })
+    }).then((_res) => {
+    alert("Auto Fetch")
+    window.location.href = '/registration-queue'
+    });
+}
+
+var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
     "KTN Kabupaten Aceh Tenggara",
     "LGS Kabupaten Aceh Timur",
     "TKN Kabupaten Aceh Tengah",
@@ -938,7 +822,8 @@ function adjustKotaNonAdmin() {
         "MSJ Kabupaten Mesuji",
         "TWG Kabupaten Tulang Bawang Barat",
         "BDL Kota Bandar Lampung",
-        "MET Kota Metro"
+        "MET Kota Metro",
+        "KRU Kabupaten Pesisir Barat",
     ];
 
     var KEPUALAN_BANGKA_BELITUNG = [
@@ -996,8 +881,7 @@ function adjustKotaNonAdmin() {
         "DPK Kota Depok",
         "CMH Kota Cimahi",
         "TSM Kota Tasikmalaya",
-        "BJR Kota Banjar",
-        "pGN Kabupaten pangandaran"
+        "BJR Kota Banjar"
     ];
 
     var JAWA_TENGAH = [
@@ -1198,23 +1082,20 @@ function adjustKotaNonAdmin() {
     ];
 
     var KALIMANTAN_TIMUR = [
-        "BPP Kota Balikpapan",
-        "BON Kota Bontang",
-        "PNJ Kabupaten Penajam Paser Utara",
-        "SMR Kota Samarinda",
-        "SGT Kabupaten Kutai Timur",
-        "SDW Kabupaten Kutai Barat",
         "TGT Kabupaten Paser",
-        "TNR Kabupaten Berau",
         "TRG Kabupaten Kutai Kartanegara",
-        "UJB Kabupaten Mahakam Ulu",
-    ];
-
-    var KALIMANTAN_UTARA = [
-        "MLN Kabupaten Malinau",
+        "TNR Kabupaten Berau",
+        "TJS Kabupaten Bulungan",
         "NNK Kabupaten Nunukan",
-        "TJS Kabupaten Bulungan (Bulongan)",
+        "MLN Kabupaten Malinau",
+        "SDW Kabupaten Kutai Barat",
+        "SGT Kabupaten Kutai Timur",
+        "PNJ Kabupaten Penajam Paser Utara",
+        "TDP Kabupaten Tana Tidung",
+        "BPP Kota Balikpapan",
+        "SMR Kota Samarinda",
         "TAR Kota Tarakan",
+        "BON Kota Bontang"
     ];
 
     var SULAWESI_UTARA = [
@@ -1285,12 +1166,7 @@ function adjustKotaNonAdmin() {
         "WGD Kabupaten Konawe Utara",
         "BNG Kabupaten Buton Utara",
         "KDI Kota Kendari",
-        "BAU Kota Bau Bau",
-        "BAG Kabupaten Buton Selatan",
-        "LBK Kabupaten Buton Tengah",
-        "TRW Kabupaten Kolaka Timur",
-        "LGR Kabupaten Konawe Kepulauan",
-        "SWG Kabupaten Muna Barat",
+        "BAU Kota Bau Bau"
     ];
 
     var GORONTALO = [
@@ -1307,8 +1183,7 @@ function adjustKotaNonAdmin() {
         "MAM Kabupaten Mamuju",
         "MMS Kabupaten Mamasa",
         "PLW Kabupaten Polewali Mandar",
-        "MJN Kabupaten Majene",
-        "PKY Kabupaten Pasang Kayu",
+        "MJN Kabupaten Majene"
     ];
 
     var MALUKU = [
@@ -1334,7 +1209,8 @@ function adjustKotaNonAdmin() {
         "MAB Kabupaten Halmahera Timur",
         "MTS Kabupaten Pulau Morotai",
         "TTE Kota Ternate",
-        "TDR Kota Tidore Kepulauan"
+        "TDR Kota Tidore Kepulauan",
+        "BOB Kabupaten Pulau Taliabu",
     ];
 
     var PAPUA = [
@@ -1380,8 +1256,10 @@ function adjustKotaNonAdmin() {
         "KMN Kabupaten Kaimana",
         "FEF Kabupaten Tambrauw",
         "AFT Kabupaten Maybrat",
-        "SON Kota Sorong"
-    ];
+        "SON Kota Sorong",
+        "RNK Kabupaten Manokwari Selatan",
+        "ANG Kabupaten Pegunungan Arfak",
+    ]
 
     var SULAWESI_SELATAN = [
         "BAN Kabupaten Bantaeng",
@@ -1410,6 +1288,124 @@ function adjustKotaNonAdmin() {
         "PRE Kota Parepare"
     ];
 
+function adjustKota() {
+    var provinsi = document.getElementById("provinsifilter").value;
+    
+    var items;
+    if (provinsi == "AC NANGRO ACEH DARUSSALAM") {
+        items = NANGRO_ACEH_DARUSSALAM;
+
+    } else if (provinsi == "SU Sumatera Utara") {
+        items = SUMATERA_UTARA;
+
+    } else if (provinsi == "SB Sumatera Barat") {
+        items = SUMATERA_BARAT;
+
+    } else if (provinsi == "RI Riau") {
+        items = RIAU;
+
+    } else if (provinsi == "JA Jambi") {
+        items = JAMBI;
+
+    } else if (provinsi == "SS Sumatera Selatan") {
+        items = SUMATERA_SELATAN;
+
+    } else if (provinsi == "BE Bengkulu") {
+        items = BENGKULU;
+
+    } else if (provinsi == "LA Lampung") {
+        items = LAMPUNG;
+
+    } else if (provinsi == "BB Kepulauan Bangka Belitung") {
+        items = KEPUALAN_BANGKA_BELITUNG;
+
+    } else if (provinsi == "KR Kepulauan Riau") {
+        items = KEPULAUAN_RIAU;
+
+    } else if (provinsi == "JK D.K.I. JAKARTA") {
+        items = DKI_JAKARTA;
+
+    } else if (provinsi == "JB Jawa Barat") {
+        items = JAWA_BARAT;
+
+    } else if (provinsi == "JT Jawa Tengah") {
+        items = JAWA_TENGAH;
+
+    } else if (provinsi == "YO D.I. YOGYAKARTA") {
+        items = DI_YOGYAKARTA;
+
+    } else if (provinsi == "JI Jawa Timur") {
+        items = JAWA_TIMUR;
+
+    } else if (provinsi == "BT Banten") {
+        items = BANTEN;
+
+    } else if (provinsi == "BA Bali") {
+        items = BALI;
+
+    } else if (provinsi == "NB Nusa Tenggara Barat") {
+        items = NUSA_TENGGARA_BARAT;
+
+    } else if (provinsi == "NT Nusa Tenggara Timur") {
+        items = NUSA_TENGGARA_TIMUR;
+
+    } else if (provinsi == "KB Kalimantan Barat") {
+        items = KALIMANTAN_BARAT;
+
+    } else if (provinsi == "KT Kalimantan Tengah") {
+        items = KALIMANTAN_TENGAH;
+
+    } else if (provinsi == "KS Kalimantan Selatan") {
+        items = KALIMANTAN_SELATAN;
+
+    } else if (provinsi == "KI Kalimantan Timur") {
+        items = KALIMANTAN_TIMUR;
+
+    } else if (provinsi == "SA Sulawesi Utara") {
+        items = SULAWESI_UTARA;
+
+    } else if (provinsi == "ST Sulawesi Tengah") {
+        items = SULAWESI_TENGAH;
+
+    } else if (provinsi == "SG Sulawesi Tenggara") {
+        items = SULAWESI_TENGGARA;
+
+    } else if (provinsi == "GO Gorontalo") {
+        items = GORONTALO;
+
+    } else if (provinsi == "SR Sulawesi Barat") {
+        items = SULAWESI_BARAT;
+
+    } else if (provinsi == "MA Maluku") {
+        items = MALUKU;
+
+    } else if (provinsi == "MU Maluku Utara") {
+        items = MALUKU_UTARA;
+
+    } else if (provinsi == "PA Papua") {
+        items = PAPUA;
+
+    } else if (provinsi == "PB Papua Barat") {
+        items = PAPUA_BARAT;
+
+    } else if (provinsi == "SN Sulawesi Selatan") {
+        items = SULAWESI_SELATAN;
+    }
+
+    else {
+        items = [];
+    }
+
+    var str = "<option value=\"\" selected>Kabupaten/Kota</option>"
+    for (var item of items) {
+        str += "<option value=" + "\"" + item + "\"" + ">" + item.split(" ").slice(1,).join(" ") + "</option>"
+    }
+    document.getElementById("kotafilter").innerHTML = str;
+}
+
+
+function adjustKotaNonAdmin() {
+    var provinsi = document.getElementById("provinsi").value;
 
     var items;
     if (provinsi == "AC NANGRO ACEH DARUSSALAM") {
