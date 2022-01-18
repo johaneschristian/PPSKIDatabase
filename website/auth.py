@@ -554,7 +554,7 @@ def resetPassword(id):
             user = User.query.get(id)
             user.password = generate_password_hash(f"ppski2021{id}")
             db.session.commit()
-            print(f"ppski2021{id}")
+            
             return redirect(url_for('views.displayTable'))
 
 @auth.route("/masuk", methods=["GET", "POST"])
@@ -635,13 +635,13 @@ def revokeAdmin(id):
 
     return redirect(url_for("views.displayTable"))
 
-# @auth.route('/generate-admin')
-# def generateAdmin():
-#     admin = User(status="admin", email="admin@admin.com",password=generate_password_hash("admin"))
-#     db.session.add(admin)
-#     db.session.commit()
-#     flash("Admin user-created")
-#     return redirect(url_for("views.home"))
+@auth.route('/generate-admin')
+def generateAdmin():
+    admin = User(status="admin", email="admin@admin.com",password=generate_password_hash("admin"))
+    db.session.add(admin)
+    db.session.commit()
+    flash("Admin user-created")
+    return redirect(url_for("views.home"))
 
 
 @auth.route("/daftar-anggota", methods=["GET", "POST"])
@@ -660,9 +660,7 @@ def daftarAnggota():
         provinsiInput = request.form.get('provinsi')
         kabupaten_kota = request.form.get('kabkota')
         esai_singkat = request.form.get('esai')
-        print(status, email, password1, password2, nama_lengkap, pendidikan,
-              tempat_mengajar, akun_facebook, nomor_telepon,
-              provinsiInput, kabupaten_kota, esai_singkat)
+        
         try:
             newUser = TemporaryUser(status=status, email=email,
                            password=generate_password_hash(password1), nama_lengkap=nama_lengkap,

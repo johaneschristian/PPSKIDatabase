@@ -631,6 +631,13 @@ var NANGRO_ACEH_DARUSSALAM = ["TTN Kabupaten Aceh Selatan",
         "PRE Kota Parepare"
     ];
 
+
+window.onload = function() {
+    if(window.location.href.match('table-display')) {
+        adjustKota();
+    }
+};
+
 function editSelected(userID) {
     alert("Editing " + userID)
     fetch("/admin-select-user", {

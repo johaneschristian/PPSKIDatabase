@@ -79,9 +79,7 @@ def home():
         provinsiInput = request.form.get('provinsi')
         kabupaten_kota = request.form.get('kabkota')
         esai_singkat = request.form.get('esai')
-        print(status, email, password1, password2, nama_lengkap, pendidikan,
-              tempat_mengajar, akun_facebook, nomor_telepon,
-              provinsiInput, kabupaten_kota, esai_singkat)
+        
         try:
             if not (email and password1 and password2 and nama_lengkap and
                     pendidikan and tempat_mengajar and nama_tempat
@@ -251,7 +249,7 @@ def displayTable():
                                                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page,
                                                                                                              per_page=20)
 
-        print(provinsifilter, kotafilter)
+        
 
         hasilPagination = matching_array
         permanen = hasilPagination.items
@@ -385,7 +383,7 @@ def kirimPesan(email, isAccepted):
 
 @views.route('/temporary-redirect', methods=["GET"])
 def temp():
-    print("called")
+    
     return redirect(url_for("views.registrationQueue"))
 
 
@@ -398,11 +396,11 @@ def bundleSend():
     global calon_diterima, calon_ditolak
 
     for user in calon_diterima:
-        print(user)
+        
         kirimPesan(email=user, isAccepted=True)
 
     for user in calon_ditolak:
-        print(user)
+        
         kirimPesan(email=user, isAccepted=False)
 
     calon_diterima = set()
