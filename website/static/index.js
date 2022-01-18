@@ -170,7 +170,8 @@ function adjustKota() {
         "PLG Kota Palembang",
         "PGA Kota Pagar Alam",
         "LLG Kota Lubuklinggau",
-        "PBM Kota Prabumulih"
+        "PBM Kota Prabumulih",
+        "TLB Kabupaten Penukal Abab Lematang Ilir",
     ];
 
     var BENGKULU = [
@@ -200,7 +201,8 @@ function adjustKota() {
         "MSJ Kabupaten Mesuji",
         "TWG Kabupaten Tulang Bawang Barat",
         "BDL Kota Bandar Lampung",
-        "MET Kota Metro"
+        "MET Kota Metro",
+        "KRU Kabupaten Pesisir Barat",
     ];
 
     var KEPUALAN_BANGKA_BELITUNG = [
@@ -586,7 +588,8 @@ function adjustKota() {
         "MAB Kabupaten Halmahera Timur",
         "MTS Kabupaten Pulau Morotai",
         "TTE Kota Ternate",
-        "TDR Kota Tidore Kepulauan"
+        "TDR Kota Tidore Kepulauan",
+        "BOB Kabupaten Pulau Taliabu",
     ];
 
     var PAPUA = [
@@ -632,7 +635,9 @@ function adjustKota() {
         "KMN Kabupaten Kaimana",
         "FEF Kabupaten Tambrauw",
         "AFT Kabupaten Maybrat",
-        "SON Kota Sorong"
+        "SON Kota Sorong",
+        "RNK Kabupaten Manokwari Selatan",
+        "ANG Kabupaten Pegunungan Arfak",
     ]
 
     var SULAWESI_SELATAN = [
@@ -734,7 +739,7 @@ function adjustKota() {
     } else if (provinsi == "SA Sulawesi Utara") {
         items = SULAWESI_UTARA;
 
-    } else if (provinsi == "ST Sulawesi TENGAH") {
+    } else if (provinsi == "ST Sulawesi Tengah") {
         items = SULAWESI_TENGAH;
 
     } else if (provinsi == "SG Sulawesi Tenggara") {
@@ -902,7 +907,8 @@ function adjustKotaNonAdmin() {
         "PLG Kota Palembang",
         "PGA Kota Pagar Alam",
         "LLG Kota Lubuklinggau",
-        "PBM Kota Prabumulih"
+        "PBM Kota Prabumulih",
+        "TLB Kabupaten Penukal Abab Lematang Ilir",
     ];
 
     var BENGKULU = [
@@ -990,7 +996,8 @@ function adjustKotaNonAdmin() {
         "DPK Kota Depok",
         "CMH Kota Cimahi",
         "TSM Kota Tasikmalaya",
-        "BJR Kota Banjar"
+        "BJR Kota Banjar",
+        "pGN Kabupaten pangandaran"
     ];
 
     var JAWA_TENGAH = [
@@ -1191,20 +1198,23 @@ function adjustKotaNonAdmin() {
     ];
 
     var KALIMANTAN_TIMUR = [
-        "TGT Kabupaten Paser",
-        "TRG Kabupaten Kutai Kartanegara",
-        "TNR Kabupaten Berau",
-        "TJS Kabupaten Bulungan",
-        "NNK Kabupaten Nunukan",
-        "MLN Kabupaten Malinau",
-        "SDW Kabupaten Kutai Barat",
-        "SGT Kabupaten Kutai Timur",
-        "PNJ Kabupaten Penajam Paser Utara",
-        "TDP Kabupaten Tana Tidung",
         "BPP Kota Balikpapan",
+        "BON Kota Bontang",
+        "PNJ Kabupaten Penajam Paser Utara",
         "SMR Kota Samarinda",
+        "SGT Kabupaten Kutai Timur",
+        "SDW Kabupaten Kutai Barat",
+        "TGT Kabupaten Paser",
+        "TNR Kabupaten Berau",
+        "TRG Kabupaten Kutai Kartanegara",
+        "UJB Kabupaten Mahakam Ulu",
+    ];
+
+    var KALIMANTAN_UTARA = [
+        "MLN Kabupaten Malinau",
+        "NNK Kabupaten Nunukan",
+        "TJS Kabupaten Bulungan (Bulongan)",
         "TAR Kota Tarakan",
-        "BON Kota Bontang"
     ];
 
     var SULAWESI_UTARA = [
@@ -1275,7 +1285,12 @@ function adjustKotaNonAdmin() {
         "WGD Kabupaten Konawe Utara",
         "BNG Kabupaten Buton Utara",
         "KDI Kota Kendari",
-        "BAU Kota Bau Bau"
+        "BAU Kota Bau Bau",
+        "BAG Kabupaten Buton Selatan",
+        "LBK Kabupaten Buton Tengah",
+        "TRW Kabupaten Kolaka Timur",
+        "LGR Kabupaten Konawe Kepulauan",
+        "SWG Kabupaten Muna Barat",
     ];
 
     var GORONTALO = [
@@ -1292,7 +1307,8 @@ function adjustKotaNonAdmin() {
         "MAM Kabupaten Mamuju",
         "MMS Kabupaten Mamasa",
         "PLW Kabupaten Polewali Mandar",
-        "MJN Kabupaten Majene"
+        "MJN Kabupaten Majene",
+        "PKY Kabupaten Pasang Kayu",
     ];
 
     var MALUKU = [
@@ -1464,6 +1480,9 @@ function adjustKotaNonAdmin() {
 
     } else if (provinsi == "KI Kalimantan Timur") {
         items = KALIMANTAN_TIMUR;
+
+    } else if (provinsi == "KU Kalimantan Utara") {
+        items = KALIMANTAN_UTARA;
 
     } else if (provinsi == "SA Sulawesi Utara") {
         items = SULAWESI_UTARA;
