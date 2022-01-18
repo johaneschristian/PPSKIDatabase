@@ -31,6 +31,7 @@ provinsi = \
      "KT Kalimantan Tengah",
      "KS Kalimantan Selatan",
      "KI Kalimantan Timur",
+     "KU Kalimantan Utara",
      "SA Sulawesi Utara",
      "ST Sulawesi Tengah",
      "SG Sulawesi Tenggara",
