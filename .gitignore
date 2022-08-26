@@ -2,3 +2,4 @@
 /venv/
 /website/database.db
 /website/__pycache__/
+/website/.env

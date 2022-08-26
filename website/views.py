@@ -1,18 +1,16 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
+from website.send_email import process_message
 from .auth import provinsi, db, kumpulankabkota
 from .models import User, TemporaryUser
-import json, smtplib, ssl, sqlalchemy
+import sqlalchemy
 import datetime
 
-views = Blueprint('views', __name__)
 
+views = Blueprint('views', __name__)
 calon_ditolak = set()
 calon_diterima = set()
-
-provinsi = provinsi
-
 
 @views.route('/ringkasan-anggota', methods=["GET", "POST"])
 def ringkasanAngggota():
@@ -249,8 +247,6 @@ def displayTable():
                                                        User.kabupaten_kota.like(f'%{kotafilter}%')).paginate(page=page,
                                                                                                              per_page=20)
 
-        
-
         hasilPagination = matching_array
         permanen = hasilPagination.items
         count = len(permanen)
@@ -324,6 +320,7 @@ def terimaAnggota(id_number):
         return "<p>Access Denied</p>"
     user = TemporaryUser.query.get(id_number)
     calon_diterima.add(user.email)
+
     if user:
         user.status = "direview"
         accepted = User(status="permanen", email=user.email,
@@ -348,60 +345,19 @@ def addtoSet(email):
     calon_diterima.add(email)
 
 
-def kirimPesan(email, isAccepted):
-    sender = "noreplyppskipusat@gmail.com"
-    password = "ppskipusat"
-    receive = email
-
-    if isAccepted:
-        message = """\
-            Subject: Pendaftaran Anggota Baru PPSKI
-            \n\n
-            Anda diterima sebagai anggota dan data Anda sudah\n
-            tercantum dalam database kami. Silakan melakukan\n
-            pengecekan dan pembaharuan
-            
-        """
-    else:
-        message = """\
-            Subject: Pendaftaran Anggota Baru PPSKI
-            \n\n
-            Anda belum diterima sebagai anggota PPSKI
-        """
-
-    context = ssl.create_default_context()
-    port = 465
-
-    print("Sending email")
-
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-        server.login(sender, password)
-        server.sendmail(sender, receive, message)
-
-    print("Email sent!")
-
-
 @views.route('/temporary-redirect', methods=["GET"])
 def temp():
-    
     return redirect(url_for("views.registrationQueue"))
 
 
 @views.route('/kirim-hasil-review', methods=["GET"])
 @login_required
 def bundleSend():
+    global calon_diterima, calon_ditolak
     if current_user.status != "admin":
         return "<p>Access Denied</p>"
 
-    global calon_diterima, calon_ditolak
-
-    for user in calon_diterima:
-        
-        kirimPesan(email=user, isAccepted=True)
-
-    for user in calon_ditolak:
-        
-        kirimPesan(email=user, isAccepted=False)
+    process_message(calon_diterima, calon_ditolak)
 
     calon_diterima = set()
     calon_ditolak = set()

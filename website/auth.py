@@ -4,7 +4,7 @@ from .models import User, TemporaryUser
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 import sqlalchemy
-import csv
+
 
 auth = Blueprint('auth', __name__)
 provinsi = \
@@ -579,34 +579,6 @@ def masuk():
             category="error")
 
     return render_template("masuk.html", accessing_user=current_user)
-
-@auth.route('/migrate-user')
-def migrateUser():
-    with open('/Users/johanestarigan/Downloads/tb_anggota_2021-Jul-12_0928/tb_anggota_2021-Jul-12_0928.csv') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        for cleaned in spamreader:
-            id_ppski = cleaned[15][1:-1]
-            kabupaten_kota = cleaned[13][1:-1]
-            provinsi = cleaned[12][1:-1]
-            nomor_telepon = '0'+ cleaned[7][1:-1]
-            nama_lengkap = cleaned[1][1:-1]
-            email = cleaned[5][1:-1]
-            nama_tempat = cleaned[4][1:-1]
-            tempat_mengajar = cleaned[3][1:-1]
-            akun_facebook = cleaned[6][1:-1]
-            try:
-                tempUser = User(status="permanen", nama_lengkap=nama_lengkap, id_ppski=id_ppski, email=email,
-                                password=generate_password_hash('ppski2021'), pendidikan=None,
-                                tempat_mengajar=tempat_mengajar, nama_tempat=nama_tempat, akun_facebook=akun_facebook,
-                                nomor_telepon=nomor_telepon, provinsi=provinsi,
-                                kabupaten_kota=kabupaten_kota
-                                )
-                db.session.add(tempUser)
-                db.session.commit()
-            except sqlalchemy.exc.IntegrityError:
-                db.session.rollback()
-
-    return redirect(url_for("views.home"))
 
 @auth.route('/make-admin/<int:id>')
 @login_required
