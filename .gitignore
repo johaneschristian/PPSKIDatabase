@@ -3,3 +3,4 @@
 /website/database.db
 /website/__pycache__/
 /website/.env
+/website/config.py
